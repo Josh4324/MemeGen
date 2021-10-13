@@ -286,34 +286,34 @@ export default function Meme() {
                             dominantBaseline="middle"
                             textAnchor="start"
                         >
-                            {s} -
+                            {s}
                         </text>
                         <text
                             style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
-                            x={"155px"}
+                            x={"210px"}
                             y={"550px"}
                             dominantBaseline="middle"
                             textAnchor="start"
                         >
-                            {p} -
+                            {p}
                         </text>
                         <text
                             style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
-                            x={"200px"}
-                            y={"550px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            {e} -
-                        </text>
-                        <text
-                            style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
-                            x={"240px"}
+                            x={"310px"}
                             y={"550px"}
                             dominantBaseline="middle"
                             textAnchor="start"
                         >
                             {e}
+                        </text>
+                        <text
+                            style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
+                            x={"410px"}
+                            y={"550px"}
+                            dominantBaseline="middle"
+                            textAnchor="start"
+                        >
+                            {c}
                         </text>
 
                         {/* <text
