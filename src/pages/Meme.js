@@ -18,10 +18,11 @@ export default function Meme() {
     const [height, setHeight] = useState(0);
     const [width, setWidth] = useState(0);
     const [base64, setBase64] = useState("");
+    const [base641, setBase641] = useState("");
     const [detail, setDetail] = useState({});
     const textStyle = {
-        fontFamily: "Impact",
-        fontSize: "50px",
+        fontSize: "60px",
+        fontWeight: "bold",
         textTransform: "uppercase",
         fill: "#FFF",
         stroke: "#000",
@@ -112,6 +113,7 @@ export default function Meme() {
         console.log(base_image);
         const base64 = getBase64Image(base_image);
         setBase64(base64);
+
     }
 
     const convertSvgToImage = () => {
@@ -172,13 +174,27 @@ export default function Meme() {
                         ref={svgRef}
                         xmlns="http://www.w3.org/2000/svg"
                         xmlnsXlink="http://www.w3.org/1999/xlink">
-                        <image
+                        <g> <image
                             xlinkHref={base64}
                             height={600}
                             width={600}
-                        />
+                        /></g>
+                        <g>
+                            <rect x={"15px"}
+                                y={"15px"} width={570} height={570} style={{ stroke: "green", fill: "none", strokeWidth: 1 }} opacity={0.5} />
+                        </g>
+                        <g>
+                            <rect width={600} height={600} style={{ fill: "green", }} opacity={0.4} />
+                        </g>
+
+
+
+
+                        <rect x={"92px"}
+                            y={"133px"} height="30" width="80" style={{ fill: "white" }}>
+                        </rect>
                         <text
-                            style={{ fill: "#FFF", zIndex: 1 }}
+                            style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Futura", fontSize: "20px", fontWeight: "bolder" }}
                             x={"100px"}
                             y={"150px"}
                             dominantBaseline="middle"
@@ -186,41 +202,118 @@ export default function Meme() {
                         >
                             {"I AM A"}
                         </text>
+
+
                         <text
-                            style={{ ...textStyle, zIndex: 1 }}
+                            style={{ ...textStyle, fontFamily: "Futura", zIndex: 1, fontSize: "70px", fontWeight: "bolder" }}
                             x={"100px"}
-                            y={"200px"}
+                            y={"220px"}
+                            dominantBaseline="middle"
+                            textAnchor="start"
+                        >
+                            s
+                        </text>
+                        <text
+                            style={{ ...textStyle, zIndex: 1, fontFamily: "GothamCond" }}
+                            x={"170px"}
+                            y={"220px"}
                             dominantBaseline="middle"
                             textAnchor="start"
                         >
                             {s}
                         </text>
                         <text
-                            style={{ ...textStyle, zIndex: 1 }}
+                            style={{ ...textStyle, fontFamily: "Futura", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
                             x={"100px"}
-                            y={"270px"}
+                            y={"290px"}
+                            dominantBaseline="middle"
+                            textAnchor="start"
+                        >
+                            p
+                        </text>
+                        <text
+                            style={{ ...textStyle, fontFamily: "GothamCond", zIndex: 1 }}
+                            x={"170px"}
+                            y={"290px"}
                             dominantBaseline="middle"
                             textAnchor="start"
                         >
                             {p}
                         </text>
                         <text
-                            style={{ ...textStyle, zIndex: 1 }}
+                            style={{ ...textStyle, fontFamily: "Futura", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
                             x={"100px"}
-                            y={"340px"}
+                            y={"360px"}
+                            dominantBaseline="middle"
+                            textAnchor="start"
+                        >
+                            e
+                        </text>
+                        <text
+                            style={{ ...textStyle, fontFamily: "GothamCond", zIndex: 1 }}
+                            x={"170px"}
+                            y={"360px"}
                             dominantBaseline="middle"
                             textAnchor="start"
                         >
                             {e}
                         </text>
                         <text
-                            style={{ ...textStyle, zIndex: 1 }}
+                            style={{ ...textStyle, fontFamily: "Futura", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
                             x={"100px"}
-                            y={"410px"}
+                            y={"430px"}
+                            dominantBaseline="middle"
+                            textAnchor="start"
+                        >
+                            c
+                        </text>
+                        <text
+                            style={{ ...textStyle, fontFamily: "GothamCond", zIndex: 1 }}
+                            x={"170px"}
+                            y={"430px"}
                             dominantBaseline="middle"
                             textAnchor="start"
                         >
                             {c}
+                        </text>
+
+                        <line x1="100" y1="520" x2="500" y2="520" style={{ stroke: "white", strokeWidth: 1 }} />
+
+                        <text
+                            style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
+                            x={"110px"}
+                            y={"550px"}
+                            dominantBaseline="middle"
+                            textAnchor="start"
+                        >
+                            {s} -
+                        </text>
+                        <text
+                            style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
+                            x={"155px"}
+                            y={"550px"}
+                            dominantBaseline="middle"
+                            textAnchor="start"
+                        >
+                            {p} -
+                        </text>
+                        <text
+                            style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
+                            x={"200px"}
+                            y={"550px"}
+                            dominantBaseline="middle"
+                            textAnchor="start"
+                        >
+                            {e} -
+                        </text>
+                        <text
+                            style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
+                            x={"240px"}
+                            y={"550px"}
+                            dominantBaseline="middle"
+                            textAnchor="start"
+                        >
+                            {e}
                         </text>
 
                         {/* <text

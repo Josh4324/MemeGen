@@ -1,3 +1,15 @@
+@font-face {
+  font-family: 'GothamCond';
+  src: local('Rajdhani'), url(./GothamCond-Black.otf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: local('Rajdhani'), url(./Futura.ttc) format('truetype');
+}
+
+
+
 .App {
   text-align: center;
 }
