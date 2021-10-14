@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'GothamCond';
-  src: local('Rajdhani'), url(./GothamCond-Black.otf) format('truetype');
+  src: local('GothamCond'), url(./GothamCond-Black.otf) format('truetype');
 }
 
 @font-face {
   font-family: 'Futura';
-  src: local('Rajdhani'), url(./Futura.ttc) format('truetype');
+  src: local('Futura'), url(./Futura.ttc) format('truetype');
 }
 
 

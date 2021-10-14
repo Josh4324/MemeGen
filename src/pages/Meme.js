@@ -21,13 +21,12 @@ export default function Meme() {
     const [base641, setBase641] = useState("");
     const [detail, setDetail] = useState({});
     const textStyle = {
-        fontSize: "60px",
+        fontSize: "50px",
         fontWeight: "bold",
         textTransform: "uppercase",
         fill: "#FFF",
         stroke: "#000",
         userSelect: "none"
-
     }
 
     const initialState = {
@@ -167,178 +166,162 @@ export default function Meme() {
 
             <div className="meme">
                 {
-                    base64 ? (<svg
-                        width={600}
-                        id="svg_ref"
-                        height={600}
-                        ref={svgRef}
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlnsXlink="http://www.w3.org/1999/xlink">
-                        <g> <image
-                            xlinkHref={base64}
-                            height={600}
+                    base64 ? (
+                        <svg
                             width={600}
-                        /></g>
-                        <g>
-                            <rect x={"15px"}
-                                y={"15px"} width={570} height={570} style={{ stroke: "green", fill: "none", strokeWidth: 1 }} opacity={0.5} />
-                        </g>
-                        <g>
-                            <rect width={600} height={600} style={{ fill: "green", }} opacity={0.4} />
-                        </g>
+                            id="svg_ref"
+                            height={600}
+                            ref={svgRef}
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlnsXlink="http://www.w3.org/1999/xlink">
+                            <defs>
+
+                            </defs>
+
+                            <g> <image
+                                xlinkHref={base64}
+                                height={600}
+                                width={600}
+                            /></g>
+                            <g>
+                                <rect x={"15px"}
+                                    y={"15px"} width={570} height={570} style={{ stroke: "green", fill: "none", strokeWidth: 1 }} opacity={0.5} />
+                            </g>
+                            <g>
+                                <rect width={600} height={600} style={{ fill: "green", }} opacity={0.4} />
+                            </g>
 
 
 
 
-                        <rect x={"92px"}
-                            y={"133px"} height="30" width="80" style={{ fill: "white" }}>
-                        </rect>
-                        <text
-                            style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Futura", fontSize: "20px", fontWeight: "bolder" }}
-                            x={"100px"}
-                            y={"150px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            {"I AM A"}
-                        </text>
+                            <rect x={"92px"}
+                                y={"133px"} height="30" width="80" style={{ fill: "white" }}>
+                            </rect>
+                            <text
+                                style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Futura", fontSize: "20px", fontWeight: "bolder" }}
+                                x={"100px"}
+                                y={"150px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                {"I AM A"}
+                            </text>
 
 
-                        <text
-                            style={{ ...textStyle, fontFamily: "Futura", zIndex: 1, fontSize: "70px", fontWeight: "bolder" }}
-                            x={"100px"}
-                            y={"220px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            s
-                        </text>
-                        <text
-                            style={{ ...textStyle, zIndex: 1, fontFamily: "GothamCond" }}
-                            x={"170px"}
-                            y={"220px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            {s}
-                        </text>
-                        <text
-                            style={{ ...textStyle, fontFamily: "Futura", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
-                            x={"100px"}
-                            y={"290px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            p
-                        </text>
-                        <text
-                            style={{ ...textStyle, fontFamily: "GothamCond", zIndex: 1 }}
-                            x={"170px"}
-                            y={"290px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            {p}
-                        </text>
-                        <text
-                            style={{ ...textStyle, fontFamily: "Futura", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
-                            x={"100px"}
-                            y={"360px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            e
-                        </text>
-                        <text
-                            style={{ ...textStyle, fontFamily: "GothamCond", zIndex: 1 }}
-                            x={"170px"}
-                            y={"360px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            {e}
-                        </text>
-                        <text
-                            style={{ ...textStyle, fontFamily: "Futura", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
-                            x={"100px"}
-                            y={"430px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            c
-                        </text>
-                        <text
-                            style={{ ...textStyle, fontFamily: "GothamCond", zIndex: 1 }}
-                            x={"170px"}
-                            y={"430px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            {c}
-                        </text>
+                            <text
+                                style={{ ...textStyle, fontFamily: "Impact", zIndex: 1, fontSize: "70px", fontWeight: "bolder" }}
+                                x={"100px"}
+                                y={"220px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                s
+                            </text>
+                            <text
+                                style={{ ...textStyle, zIndex: 1, fontFamily: "Arial" }}
+                                x={"170px"}
+                                y={"220px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                {s}
+                            </text>
+                            <text
+                                style={{ ...textStyle, fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
+                                x={"100px"}
+                                y={"290px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                p
+                            </text>
+                            <text
+                                style={{ ...textStyle, fontFamily: "Arial", zIndex: 1 }}
+                                x={"170px"}
+                                y={"290px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                {p}
+                            </text>
+                            <text
+                                style={{ ...textStyle, fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
+                                x={"100px"}
+                                y={"360px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                e
+                            </text>
+                            <text
+                                style={{ ...textStyle, fontFamily: "Arial", zIndex: 1 }}
+                                x={"170px"}
+                                y={"360px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                {e}
+                            </text>
+                            <text
+                                style={{ ...textStyle, fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
+                                x={"100px"}
+                                y={"430px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                c
+                            </text>
+                            <text
+                                style={{ ...textStyle, fontFamily: "Arial", zIndex: 1 }}
+                                x={"170px"}
+                                y={"430px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                {c}
+                            </text>
 
-                        <line x1="100" y1="520" x2="500" y2="520" style={{ stroke: "white", strokeWidth: 1 }} />
+                            <line x1="100" y1="520" x2="500" y2="520" style={{ stroke: "white", strokeWidth: 1 }} />
 
-                        <text
-                            style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
-                            x={"110px"}
-                            y={"550px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            {s}
-                        </text>
-                        <text
-                            style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
-                            x={"210px"}
-                            y={"550px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            {p}
-                        </text>
-                        <text
-                            style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
-                            x={"310px"}
-                            y={"550px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            {e}
-                        </text>
-                        <text
-                            style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "GothamCond" }}
-                            x={"410px"}
-                            y={"550px"}
-                            dominantBaseline="middle"
-                            textAnchor="start"
-                        >
-                            {c}
-                        </text>
+                            <text
+                                style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                x={"110px"}
+                                y={"550px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                {s}
+                            </text>
+                            <text
+                                style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                x={"210px"}
+                                y={"550px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                {p}
+                            </text>
+                            <text
+                                style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                x={"310px"}
+                                y={"550px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                {e}
+                            </text>
+                            <text
+                                style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                x={"410px"}
+                                y={"550px"}
+                                dominantBaseline="middle"
+                                textAnchor="start"
+                            >
+                                {c}
+                            </text>
 
-                        {/* <text
-                            style={{ ...textStyle, zIndex: this.state.isTopDragging ? 4 : 1 }}
-                            x={this.state.topX}
-                            y={this.state.topY}
-                            dominantBaseline="middle"
-                            textAnchor="middle"
-                            onMouseDown={event => this.handleMouseDown(event, 'top')}
-                            onMouseUp={event => this.handleMouseUp(event, 'top')}
-                        >
-                            {this.state.toptext}
-                        </text>
-                        <text
-                            style={textStyle}
-                            dominantBaseline="middle"
-                            textAnchor="middle"
-                            x={this.state.bottomX}
-                            y={this.state.bottomY}
-                            onMouseDown={event => this.handleMouseDown(event, 'bottom')}
-                            onMouseUp={event => this.handleMouseUp(event, 'bottom')}
-                        >
-                            {this.state.bottomtext}
-                        </text> */}
-                    </svg>) : (null)
+
+                        </svg>) : (null)
                 }
                 <button className="button" onClick={convertSvgToImage}>Download Meme</button>
             </div>
