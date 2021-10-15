@@ -145,8 +145,6 @@ export default function Meme() {
         const result = await postImage(formData);
         console.log(result);
         if (result.code === 200) {
-
-            NotificationManager.success("Image Upload Successful", "Success");
             NotificationManager.info("Generating Meme", "Info")
             generateMeme(result.data);
             setfile(result.data)
