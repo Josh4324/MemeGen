@@ -8,7 +8,9 @@
   src: local('Futura'), url(./Futura.ttc) format('truetype');
 }
 
-
+body {
+  font-family: "Futura", arial;
+}
 
 .App {
   text-align: center;
@@ -36,6 +38,7 @@
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  padding-top: 50px;
   padding-bottom: 50px;
 }
 
@@ -69,10 +72,13 @@
 }
 
 .box {
-  width: 400px;
+  width: 460px;
   margin-left: auto;
   margin-right: auto;
-  padding-top:50px;
+  margin-top: 50px;
+  border: 1px solid rgb(50 176 3/95%);
+  background: #000;
+  padding: 30px;
 }
 
 .share-button i {
@@ -86,32 +92,73 @@
   font-weight: 600;
   padding: 10px 20px;
   border: none;
-  margin-top: 20px;
+  
 }
-
+h1, h2, h3, h4, h5 {
+  font-family: "Futura", arial;
+}
 .spec-header{
   margin-top: 0;
   padding: 10px;
   text-align: center;
-  font-family: "Futura";
-  font-size: 40px;
+  font-family: "Futura", arial;
+  font-size: 32px;
+}
+.spec-sub-header {
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .form-box {
-  padding: 10px;
+  /* padding: 10px; */
 }
-
+.box .form-group {
+  border: 1px solid rgb(255 255 255 / 25%);
+}
+.box .form-group .text {
+  line-height: 40px;
+    padding: 0 14px;
+    background: rgb(255 255 255 / 25%);
+}
 .meme-input{
-  height: 30px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  height: 40px;
+  border-radius: 0;
+  color: #fff;
+}
+.meme-input:focus{
+  background: transparent;
+  color: #fff;
+  border: 0;
+    outline: none;
+    box-shadow: none;
+}
+.upload-btn-wrapper {
+  position: relative;
+  padding-top: 10px;
+}
+.upload-btn-wrapper input[type=file].input-file {
+  position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.upload-btn-wrapper .btn {
   width: 100%;
 }
-
 .button {
-  display: block;
-  padding: 10px;
-  margin-bottom: 10px;
-  margin-left: auto;
-  margin-right: auto;
+  display: inline-block;
+    background: none;
+    padding: 0;
+    border: 0;
+    margin-top: 10px;
 }
 
 .text {
@@ -121,8 +168,28 @@
 }
 
 .meme {
-  width: 600px;
+  /* width: 600px; */
   margin-left:auto;
   margin-right: auto;
   margin-bottom: 30px;
+}
+.home-spec-info {
+  padding: 20px 30px 30px;
+  border: 1px solid rgb(50 176 3/95%);
+  background: #000;
+  margin-bottom: 30px;
+}
+
+.notification-container {
+  box-shadow: none;
+}
+.notification {
+  box-shadow: none;
+}
+
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
+  font-size: 12px;
 }

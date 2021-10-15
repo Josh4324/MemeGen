@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from "react-router-dom";
 import { NotificationManager } from 'react-notifications';
 import axios from "axios";
 
@@ -162,11 +163,28 @@ export default function Meme() {
 
     return (
         <div className="wrapper-home" style={{ backgroundImage: "url(images/bg-new-2.jpg)" }}>
+            <header className="header">
+          <div class="container">
+            <div class="row">
+                <div class="col-6">
+                <Link to="/" className = "logo">
+                    <img src="images/2sure-logo.png" style={{height: "80px"}}/>
+                </Link>
+                </div>
+                <div class="col-6 text-right">
+                {/* <Link to="/" className = "logo">
+                    <img src="images/logo.svg"/>
+                </Link> */}
+                </div>
+            </div>
+            
+          </div>
+        </header>
             <div className="box">
-                <h3 className="spec-header">SPEC MEME GENERATOR</h3>
+                <h3 className="spec-header">Spec Meme Generator</h3>
                 {
                     imgState === true ? (null) : (<div className="form-box">
-                        <h4 style={{ textAlign: "center", fontSize: "16px", marginBottom: "20px" }}>Enter your Details to generate your Spec Meme</h4>
+                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme</p>
                         <div className="flex form-group">
                             <div className="text">S</div>
                             <input className="meme-input form-control" ref={Sref} type="text" />
@@ -183,22 +201,23 @@ export default function Meme() {
                             <div className="text">C</div>
                             <input className="meme-input form-control" ref={Cref} type="text" />
                         </div>
-                        <button className="button" >
+                        <div className="upload-btn-wrapper">
+                            <button class="btn"><i class="fas fa-camera"></i> Upload your photo</button>
                             <input type="file" onChange={imageSubmit} name="file" id="file" ref={fileRef} class="input-file" />
-                        </button>
+                        </div>
                     </div>)
                 }
 
-            </div>
+            
 
             {
                 imgState === true ? (<div className="meme">
                     {
                         base64 ? (
                             <svg
-                                width={600}
+                                width={400}
                                 id="svg_ref"
-                                height={600}
+                                height={400}
                                 ref={svgRef}
                                 xmlns="http://www.w3.org/2000/svg"
                                 xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -351,8 +370,8 @@ export default function Meme() {
 
                             </svg>) : (null)
                     }
-                    <button className="button btn btn-block download-button px-2" onClick={convertSvgToImage}>Download Meme</button>
-                    <button className="button btn btn-block download-button px-2" onClick={reset} >Create Meme</button>
+                    <button className="btn btn-block download-button px-2 mt-3" onClick={convertSvgToImage}><i class="fas fa-download"></i> Download Meme</button>
+                    {/* <button className="button btn btn-block download-button px-2" onClick={reset} >Create Meme</button> */}
 
                     <div class="share-button text-center mt-4">
 
@@ -371,13 +390,13 @@ export default function Meme() {
                             target="_blank"
                             style={{ color: "white" }}
                             rel="noopener noreferrer"
-                            className="share-button mr-3" href={`https://twitter.com/share?text=I just checked my Spec Status and the result shows that I' am ${""}. You can check your spec status at https://checkspecstatus.com`}><i class="fab fa-twitter-square"></i></a>
+                            className="share-button mr-3" href={`https://twitter.com/share?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com`}><i class="fab fa-twitter-square"></i></a>
                         <a
                             target="_blank"
                             style={{ color: "white" }}
                             rel="noopener noreferrer"
                             className="share-button mr-3"
-                            href={`whatsapp://send?text=I just checked my Spec Status and the result shows that I' am ${""}. You can check your spec status at https://checkspecstatus.com`}>
+                            href={`whatsapp://send?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com`}>
                             <i class="fab fa-whatsapp"></i>
                         </a>
                         <a
@@ -391,7 +410,46 @@ export default function Meme() {
                     </div>
                 </div>) : (null)
             }
+            </div>
+<div class="footer">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+              <Link to="/privacy" style={{color:"white"}}>
+                <div class="col-md-12">
+                  <span>TERMS OF USE/ PRIVACY</span>
+                </div>
+              </Link>
+              </div>
 
+              <div class="col-md-6 text-right">
+              <a
+            target="_blank"
+            style={{color:"white"}}
+            rel="noopener noreferrer"
+            className = "share-button mr-3"
+            href="https://www.facebook.com/2SureNigeria/">
+            <i class="fab fa-facebook-square"></i>
+          </a>
+            <a
+            target="_blank"
+            style={{color:"white"}}
+            rel="noopener noreferrer"
+            className = "share-button mr-3"
+            href="https://www.instagram.com/2sureng/">
+            <i class="fab fa-instagram"></i>
+          </a>
+              <a                         
+            target="_blank"
+            style={{color:"white"}}
+            rel="noopener noreferrer"
+            className = "share-button mr-3" href="https://www.twitter.com/2SureNG/"><i class="fab fa-twitter-square"></i></a> 
+             
+              </div>
+            </div>
+            
+          </div>
+        </div>
 
         </div >
     )
