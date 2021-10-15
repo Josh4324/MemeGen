@@ -125,7 +125,7 @@ export default function Meme() {
 
     const postImage = async (userCred) => {
         try {
-            const res = await axios.patch(`http://localhost:8081/api/v1/image`, userCred);
+            const res = await axios.patch(`https://www.checkspecstatus.com/api/v1/image`, userCred);
             console.log(res);
             return res.data;
         } catch (err) {
