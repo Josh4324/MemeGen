@@ -8,7 +8,7 @@ import Meme from "./pages/Meme";
 
 function App() {
   return (
-    <div>
+    <div className="back">
       <Switch>
         <Route exact path="/" component={Meme} />
       </Switch>

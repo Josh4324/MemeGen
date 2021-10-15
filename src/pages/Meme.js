@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NotificationManager } from 'react-notifications';
-
+import axios from "axios";
 
 export default function Meme() {
     const Sref = useRef("");
@@ -8,9 +8,11 @@ export default function Meme() {
     const Eref = useRef("");
     const Cref = useRef("");
     const imageRef = useRef("");
+    const fileRef = useRef("");
     const svgRef = useRef("");
 
     const [file, setfile] = useState("");
+    const [imgState, setImgState] = useState(false);
     const [s, setS] = useState("");
     const [p, setP] = useState("");
     const [e, setE] = useState("");
@@ -23,9 +25,8 @@ export default function Meme() {
     const textStyle = {
         fontSize: "50px",
         fontWeight: "bold",
-        textTransform: "uppercase",
+        textTransform: "capitalize",
         fill: "#FFF",
-        stroke: "#000",
         userSelect: "none"
     }
 
@@ -48,46 +49,31 @@ export default function Meme() {
         }
     }, [base64])
 
-
-    const myWidget = window.cloudinary.createUploadWidget({
-        cloudName: 'josh4324',
-        uploadPreset: 'hq1e5jub'
-    }, (error, result) => {
-        if (!error && result && result.event === "success") {
-            console.log('Done! Here is the image info: ', result.info);
-            setfile(result.info.secure_url)
-            setDetail(result.info);
-            console.log(result.info);
-        }
-    }
-    )
-
-    const showWidget = (evt) => {
-        evt.preventDefault();
-        //setFile(null);
-        myWidget.open();
-    }
-
     const getBase64Image = (img) => {
         console.log(img)
         img.crossOrigin = '*';
         img.onload = () => {
             const canvas = document.createElement("canvas");
             canvas.width = img.width;
+            setWidth(img.width);
             canvas.height = img.height;
+            setHeight(img.height)
             const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0)
+            ctx.drawImage(img, 0, 0,)
             console.log("can", canvas);
             const dataURL = canvas.toDataURL("image/png");
             console.log(dataURL);
+            setImgState(true);
             setBase64(dataURL);
             return dataURL;
         }
 
     }
 
-    const generateMeme = () => {
-        if (file === "") {
+    const generateMeme = (img) => {
+        console.log(img);
+        console.log(Sref, Pref, Eref, Cref)
+        if (!img) {
             return NotificationManager.error("Please select an image", "Error");
         }
         if (Sref.current.value === "") {
@@ -106,7 +92,7 @@ export default function Meme() {
         setP(Pref.current.value);
         setE(Eref.current.value);
         setC(Cref.current.value);
-        const image = file;
+        const image = img;
         const base_image = new Image();
         base_image.src = image;
         console.log(base_image);
@@ -116,6 +102,7 @@ export default function Meme() {
     }
 
     const convertSvgToImage = () => {
+        NotificationManager.info("Downloading Meme", "info");
         let svgData = new XMLSerializer().serializeToString(svgRef.current);
         const canvas = document.createElement("canvas");
         canvas.setAttribute("id", "canvas");
@@ -135,196 +122,279 @@ export default function Meme() {
         };
     }
 
+    const postImage = async (userCred) => {
+        try {
+            const res = await axios.patch(`https://checkspecstatus.com/api/v1/image`, userCred);
+            console.log(res);
+            return res.data;
+        } catch (err) {
+            return err;
+        }
+    };
+
+    const imageSubmit = async (evt) => {
+        NotificationManager.info("Image Upload in progress", "Info")
+        evt.preventDefault();
+
+        const file = fileRef.current.files[0];
+
+        let formData = new FormData();
+        formData.append("picture", file);
+
+
+        const result = await postImage(formData);
+        console.log(result);
+        if (result.code === 200) {
+
+            NotificationManager.success("Image Upload Successful", "Success");
+            NotificationManager.info("Generating Meme", "Info")
+            generateMeme(result.data);
+            setfile(result.data)
+        } else {
+            NotificationManager.error("Error uploading Image", "Error")
+        }
+
+    }
+
+    const reset = () => {
+        setImgState(false);
+    }
+
 
 
     return (
-        <div>
+        <div className="wrapper-home" style={{ backgroundImage: "url(images/bg-new-2.jpg)" }}>
             <div className="box">
-                <div className="form-box">
-                    <h4>Enter your Details to generate your Spec Meme</h4>
-                    <div className="flex">
-                        <div className="text">S</div>
-                        <input className="meme-input" ref={Sref} type="text" />
-                    </div>
-                    <div className="flex">
-                        <div className="text">P</div>
-                        <input className="meme-input" ref={Pref} type="text" />
-                    </div>
-                    <div className="flex">
-                        <div className="text">E</div>
-                        <input className="meme-input" ref={Eref} type="text" />
-                    </div>
-                    <div className="flex">
-                        <div className="text">C</div>
-                        <input className="meme-input" ref={Cref} type="text" />
-                    </div>
-                    <button className="button" onClick={showWidget}>Upload your fav picture</button>
-                    <button className="button" onClick={generateMeme}>Generate Meme</button>
-
-                </div>
-            </div>
-
-            <div className="meme">
+                <h3 className="spec-header">SPEC MEME GENERATOR</h3>
                 {
-                    base64 ? (
-                        <svg
-                            width={600}
-                            id="svg_ref"
-                            height={600}
-                            ref={svgRef}
-                            xmlns="http://www.w3.org/2000/svg"
-                            xmlnsXlink="http://www.w3.org/1999/xlink">
-                            <defs>
-
-                            </defs>
-
-                            <g> <image
-                                xlinkHref={base64}
-                                height={600}
-                                width={600}
-                            /></g>
-                            <g>
-                                <rect x={"15px"}
-                                    y={"15px"} width={570} height={570} style={{ stroke: "green", fill: "none", strokeWidth: 1 }} opacity={0.5} />
-                            </g>
-                            <g>
-                                <rect width={600} height={600} style={{ fill: "green", }} opacity={0.4} />
-                            </g>
-
-
-
-
-                            <rect x={"92px"}
-                                y={"133px"} height="30" width="80" style={{ fill: "white" }}>
-                            </rect>
-                            <text
-                                style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Futura", fontSize: "20px", fontWeight: "bolder" }}
-                                x={"100px"}
-                                y={"150px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                {"I AM A"}
-                            </text>
-
-
-                            <text
-                                style={{ ...textStyle, fontFamily: "Impact", zIndex: 1, fontSize: "70px", fontWeight: "bolder" }}
-                                x={"100px"}
-                                y={"220px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                s
-                            </text>
-                            <text
-                                style={{ ...textStyle, zIndex: 1, fontFamily: "Arial" }}
-                                x={"170px"}
-                                y={"220px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                {s}
-                            </text>
-                            <text
-                                style={{ ...textStyle, fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
-                                x={"100px"}
-                                y={"290px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                p
-                            </text>
-                            <text
-                                style={{ ...textStyle, fontFamily: "Arial", zIndex: 1 }}
-                                x={"170px"}
-                                y={"290px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                {p}
-                            </text>
-                            <text
-                                style={{ ...textStyle, fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
-                                x={"100px"}
-                                y={"360px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                e
-                            </text>
-                            <text
-                                style={{ ...textStyle, fontFamily: "Arial", zIndex: 1 }}
-                                x={"170px"}
-                                y={"360px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                {e}
-                            </text>
-                            <text
-                                style={{ ...textStyle, fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
-                                x={"100px"}
-                                y={"430px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                c
-                            </text>
-                            <text
-                                style={{ ...textStyle, fontFamily: "Arial", zIndex: 1 }}
-                                x={"170px"}
-                                y={"430px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                {c}
-                            </text>
-
-                            <line x1="100" y1="520" x2="500" y2="520" style={{ stroke: "white", strokeWidth: 1 }} />
-
-                            <text
-                                style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                x={"110px"}
-                                y={"550px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                {s}
-                            </text>
-                            <text
-                                style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                x={"210px"}
-                                y={"550px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                {p}
-                            </text>
-                            <text
-                                style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                x={"310px"}
-                                y={"550px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                {e}
-                            </text>
-                            <text
-                                style={{ ...textStyle, zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                x={"410px"}
-                                y={"550px"}
-                                dominantBaseline="middle"
-                                textAnchor="start"
-                            >
-                                {c}
-                            </text>
-
-
-                        </svg>) : (null)
+                    imgState === true ? (null) : (<div className="form-box">
+                        <h4 style={{ textAlign: "center", fontSize: "16px", marginBottom: "20px" }}>Enter your Details to generate your Spec Meme</h4>
+                        <div className="flex form-group">
+                            <div className="text">S</div>
+                            <input className="meme-input form-control" ref={Sref} type="text" />
+                        </div>
+                        <div className="flex">
+                            <div className="text">P</div>
+                            <input className="meme-input" ref={Pref} type="text" />
+                        </div>
+                        <div className="flex">
+                            <div className="text">E</div>
+                            <input className="meme-input" ref={Eref} type="text" />
+                        </div>
+                        <div className="flex">
+                            <div className="text">C</div>
+                            <input className="meme-input" ref={Cref} type="text" />
+                        </div>
+                        <button className="button" >
+                            <input type="file" onChange={imageSubmit} name="file" id="file" ref={fileRef} class="input-file" />
+                        </button>
+                    </div>)
                 }
-                <button className="button" onClick={convertSvgToImage}>Download Meme</button>
+
             </div>
+
+            {
+                imgState === true ? (<div className="meme">
+                    {
+                        base64 ? (
+                            <svg
+                                width={600}
+                                id="svg_ref"
+                                height={600}
+                                ref={svgRef}
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlnsXlink="http://www.w3.org/1999/xlink">
+                                <defs>
+
+                                </defs>
+
+                                <g> <image
+                                    xlinkHref={base64}
+
+                                    width={600}
+                                /></g>
+                                <g>
+                                    <rect x={"15px"}
+                                        y={"15px"} width={570} height={570} style={{ stroke: "green", fill: "none", strokeWidth: 1 }} opacity={0.5} />
+                                </g>
+                                <g>
+                                    <rect width={600} height={600} style={{ fill: "green", }} opacity={0.4} />
+                                </g>
+
+
+
+
+                                <rect x={"92px"}
+                                    y={"133px"} height="30" width="80" style={{ fill: "white" }}>
+                                </rect>
+                                <text
+                                    style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Futura", fontSize: "20px", fontWeight: "bolder" }}
+                                    x={"100px"}
+                                    y={"150px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {"I AM A"}
+                                </text>
+
+
+                                <text
+                                    style={{ ...textStyle, fontFamily: "Impact", zIndex: 1, stroke: "black", strokeWidth: "2", fontSize: "70px", fontWeight: "bolder" }}
+                                    x={"100px"}
+                                    y={"220px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    s
+                                </text>
+                                <text
+                                    style={{ ...textStyle, zIndex: 1, stroke: "black", strokeWidth: "2", fontFamily: "Arial" }}
+                                    x={"170px"}
+                                    y={"220px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {s}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, fontFamily: "Impact", stroke: "black", strokeWidth: "2", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
+                                    x={"100px"}
+                                    y={"290px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    p
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
+                                    x={"170px"}
+                                    y={"290px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {p}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
+                                    x={"100px"}
+                                    y={"360px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    e
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
+                                    x={"170px"}
+                                    y={"360px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {e}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
+                                    x={"100px"}
+                                    y={"430px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    c
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
+                                    x={"170px"}
+                                    y={"430px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {c}
+                                </text>
+
+                                <line x1="100" y1="520" x2="500" y2="520" style={{ stroke: "white", strokeWidth: 1 }} />
+
+                                <text
+                                    style={{ ...textStyle, stroke: "black", margin: "5px", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                    x={"110px"}
+                                    y={"550px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {s}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                    x={"210px"}
+                                    y={"550px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {p}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, padding: "5px", stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                    x={"310px"}
+                                    y={"550px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {e}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                    x={"410px"}
+                                    y={"550px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {c}
+                                </text>
+
+
+                            </svg>) : (null)
+                    }
+                    <button className="button btn btn-block download-button px-2" onClick={convertSvgToImage}>Download Meme</button>
+                    <button className="button btn btn-block download-button px-2" onClick={reset} >Create Meme</button>
+
+                    <div class="share-button text-center mt-4">
+
+                        <div class="share-text mt-3 mb-1">Share on:</div>
+
+
+                        <a
+                            target="_blank"
+                            style={{ color: "white" }}
+                            rel="noopener noreferrer"
+                            className="share-button mr-3"
+                            href={`https://www.facebook.com/sharer.php?u=${file}`}>
+                            <i class="fab fa-facebook-square"></i>
+                        </a>
+                        <a
+                            target="_blank"
+                            style={{ color: "white" }}
+                            rel="noopener noreferrer"
+                            className="share-button mr-3" href={`https://twitter.com/share?text=I just checked my Spec Status and the result shows that I' am ${""}. You can check your spec status at https://checkspecstatus.com`}><i class="fab fa-twitter-square"></i></a>
+                        <a
+                            target="_blank"
+                            style={{ color: "white" }}
+                            rel="noopener noreferrer"
+                            className="share-button mr-3"
+                            href={`whatsapp://send?text=I just checked my Spec Status and the result shows that I' am ${""}. You can check your spec status at https://checkspecstatus.com`}>
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a
+                            target="_blank"
+                            style={{ color: "white" }}
+                            rel="noopener noreferrer"
+                            className="share-button mr-3"
+                            href="https://www.instagram.com">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>) : (null)
+            }
+
+
         </div >
     )
 }

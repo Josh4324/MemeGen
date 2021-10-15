@@ -25,6 +25,20 @@
   }
 }
 
+.back {
+  color: white;
+  background: #000;
+}
+
+.wrapper-home {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  padding-bottom: 50px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -58,7 +72,28 @@
   width: 400px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10%;
+}
+
+.share-button i {
+  font-size: 30px;
+}
+
+.btn {
+  background: #2fa703;
+  color: #fff;
+  border-radius: 3px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  margin-top: 20px;
+}
+
+.spec-header{
+  margin-top: 0;
+  padding: 10px;
+  text-align: center;
+  font-family: "Futura";
+  font-size: 40px;
 }
 
 .form-box {
@@ -79,7 +114,7 @@
 }
 
 .text {
-  padding: 8px;
+  padding-right: 8px;
   font-size: large;
   font-weight: bolder;
 }
