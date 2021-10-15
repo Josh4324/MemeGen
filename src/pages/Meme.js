@@ -60,7 +60,7 @@ export default function Meme() {
             canvas.height = img.height;
             setHeight(img.height)
             const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0,)
+            ctx.drawImage(img, 0, 0, 400, 400)
             console.log("can", canvas);
             const dataURL = canvas.toDataURL("image/png");
             console.log(dataURL);
@@ -110,7 +110,7 @@ export default function Meme() {
 
     const postImage = async (userCred) => {
         try {
-            const res = await axios.patch(`https://checkspecstatus.com/api/v1/image`, userCred);
+            const res = await axios.patch(`http://localhost:8081/api/v1/image`, userCred);
             console.log(res);
             return res.data;
         } catch (err) {
