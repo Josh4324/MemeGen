@@ -48,7 +48,7 @@ export default function Meme() {
         console.log("render")
         return () => {
         }
-    }, [])
+    }, [base64])
 
     const getBase64Image = (img) => {
         console.log(img)
@@ -77,7 +77,22 @@ export default function Meme() {
         if (!img) {
             return NotificationManager.error("Please select an image", "Error");
         }
-
+        if (Sref.current.value === "") {
+            return NotificationManager.error("Please enter your S value", "Error")
+        }
+        if (Pref.current.value === "") {
+            return NotificationManager.error("Please enter your P value", "Error")
+        }
+        if (Eref.current.value === "") {
+            return NotificationManager.error("Please enter your E value", "Error")
+        }
+        if (Cref.current.value === "") {
+            return NotificationManager.error("Please enter your C value", "Error")
+        }
+        setS(Sref.current.value);
+        setP(Pref.current.value);
+        setE(Eref.current.value);
+        setC(Cref.current.value);
         const image = img;
         const base_image = new Image();
         base_image.src = image;
@@ -119,27 +134,6 @@ export default function Meme() {
     };
 
     const imageSubmit = async (evt) => {
-
-        if (Sref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your S value", "Error")
-        }
-        if (Pref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your P value", "Error")
-        }
-        if (Eref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your E value", "Error")
-        }
-        if (Cref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your C value", "Error")
-        }
-        setS(Sref.current.value);
-        setP(Pref.current.value);
-        setE(Eref.current.value);
-        setC(Cref.current.value);
         NotificationManager.info("Image Upload in progress", "Info")
         evt.preventDefault();
 
@@ -152,6 +146,8 @@ export default function Meme() {
         const result = await postImage(formData);
         console.log(result);
         if (result.code === 200) {
+
+            NotificationManager.success("Image Upload Successful", "Success");
             NotificationManager.info("Generating Meme", "Info")
             generateMeme(result.data);
             setfile(result.data)
@@ -170,22 +166,22 @@ export default function Meme() {
     return (
         <div className="wrapper-home" style={{ backgroundImage: "url(images/bg-new-2.jpg)" }}>
             <header className="header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-6">
-                            <Link to="/" className="logo">
-                                <img src="images/2sure-logo.png" style={{ height: "80px" }} />
-                            </Link>
-                        </div>
-                        <div class="col-6 text-right">
-                            {/* <Link to="/" className = "logo">
+          <div class="container">
+            <div class="row">
+                <div class="col-6">
+                <Link to="/" className = "logo">
+                    <img src="images/2sure-logo.png" style={{height: "80px"}}/>
+                </Link>
+                </div>
+                <div class="col-6 text-right">
+                {/* <Link to="/" className = "logo">
                     <img src="images/logo.svg"/>
                 </Link> */}
-                        </div>
-                    </div>
-
                 </div>
-            </header>
+            </div>
+            
+          </div>
+        </header>
             <div className="box">
                 <h3 className="spec-header">Spec Meme Generator</h3>
                 {
@@ -214,248 +210,248 @@ export default function Meme() {
                     </div>)
                 }
 
+            
+
+            {
+                imgState === true ? (<div className="meme">
+                    {
+                        base64 ? (
+                            <svg
+                                width={300}
+                                id="svg_ref"
+                                height={300}
+                                ref={svgRef}
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlnsXlink="http://www.w3.org/1999/xlink">
+                                <defs>
+
+                                </defs>
+
+                                <g> <image
+                                    xlinkHref={base64}
+
+                                    width={600}
+                                /></g>
+                                <g>
+                                    <rect x={"15px"}
+                                        y={"15px"} width={570} height={570} style={{ stroke: "green", fill: "none", strokeWidth: 1 }} opacity={0.5} />
+                                </g>
+                                <g>
+                                    <rect width={600} height={600} style={{ fill: "green", }} opacity={0.4} />
+                                </g>
 
 
-                {
-                    imgState === true ? (<div className="meme">
-                        {
-                            base64 ? (
-                                <svg
-                                    width={400}
-                                    id="svg_ref"
-                                    height={400}
-                                    ref={svgRef}
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xmlnsXlink="http://www.w3.org/1999/xlink">
-                                    <defs>
-
-                                    </defs>
-
-                                    <g> <image
-                                        xlinkHref={base64}
-
-                                        width={400}
-                                    /></g>
-                                    <g>
-                                        <rect x={"15px"}
-                                            y={"15px"} width={370} height={370} style={{ stroke: "green", fill: "none", strokeWidth: 1 }} opacity={0.5} />
-                                    </g>
-                                    <g>
-                                        <rect width={600} height={600} style={{ fill: "green", }} opacity={0.4} />
-                                    </g>
 
 
+                                <rect x={"92px"}
+                                    y={"133px"} height="30" width="80" style={{ fill: "white" }}>
+                                </rect>
+                                <text
+                                    style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Futura", fontSize: "20px", fontWeight: "bolder" }}
+                                    x={"100px"}
+                                    y={"150px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {"I AM A"}
+                                </text>
 
 
-                                    <rect x={"40px"}
-                                        y={"20px"} height="30" width="80" style={{ fill: "white" }}>
-                                    </rect>
-                                    <text
-                                        style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Futura", fontSize: "20px", fontWeight: "bolder" }}
-                                        x={"50px"}
-                                        y={"35px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {"I AM A"}
-                                    </text>
+                                <text
+                                    style={{ ...textStyle, fontFamily: "Impact", zIndex: 1, stroke: "black", strokeWidth: "2", fontSize: "70px", fontWeight: "bolder" }}
+                                    x={"100px"}
+                                    y={"220px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    s
+                                </text>
+                                <text
+                                    style={{ ...textStyle, zIndex: 1, stroke: "black", strokeWidth: "2", fontFamily: "Arial" }}
+                                    x={"170px"}
+                                    y={"220px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {s}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, fontFamily: "Impact", stroke: "black", strokeWidth: "2", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
+                                    x={"100px"}
+                                    y={"290px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    p
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
+                                    x={"170px"}
+                                    y={"290px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {p}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
+                                    x={"100px"}
+                                    y={"360px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    e
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
+                                    x={"170px"}
+                                    y={"360px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {e}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
+                                    x={"100px"}
+                                    y={"430px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    c
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
+                                    x={"170px"}
+                                    y={"430px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {c}
+                                </text>
+
+                                <line x1="100" y1="520" x2="500" y2="520" style={{ stroke: "white", strokeWidth: 1 }} />
+
+                                <text
+                                    style={{ ...textStyle, stroke: "black", margin: "5px", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                    x={"110px"}
+                                    y={"550px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {s}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                    x={"210px"}
+                                    y={"550px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {p}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, padding: "5px", stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                    x={"310px"}
+                                    y={"550px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {e}
+                                </text>
+                                <text
+                                    style={{ ...textStyle, stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
+                                    x={"410px"}
+                                    y={"550px"}
+                                    dominantBaseline="middle"
+                                    textAnchor="start"
+                                >
+                                    {c}
+                                </text>
 
 
-                                    <text
-                                        style={{ ...textStyle, fontFamily: "Impact", zIndex: 1, stroke: "black", strokeWidth: "2", fontSize: "70px", fontWeight: "bolder" }}
-                                        x={"70px"}
-                                        y={"100px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        s
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, zIndex: 1, stroke: "black", strokeWidth: "2", fontFamily: "Arial" }}
-                                        x={"150px"}
-                                        y={"100px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {s}
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, fontFamily: "Impact", stroke: "black", strokeWidth: "2", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
-                                        x={"70px"}
-                                        y={"170px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        p
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"150px"}
-                                        y={"170px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {p}
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
-                                        x={"70px"}
-                                        y={"240px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        e
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"150px"}
-                                        y={"240px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {e}
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "70px", fontWeight: "bolder", zIndex: 1 }}
-                                        x={"70px"}
-                                        y={"310px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        c
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"150px"}
-                                        y={"310px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {c}
-                                    </text>
+                            </svg>) : (null)
+                    }
+                    <button className="btn btn-block download-button px-2 mt-3" onClick={convertSvgToImage}><i class="fas fa-download"></i> Download Meme</button>
+                    {/* <button className="button btn btn-block download-button px-2" onClick={reset} >Create Meme</button> */}
 
-                                    <line x1="100" y1="520" x2="500" y2="520" style={{ stroke: "white", strokeWidth: 1 }} />
+                    <div class="share-button text-center mt-4">
 
-                                    <text
-                                        style={{ ...textStyle, stroke: "black", margin: "5px", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                        x={"110px"}
-                                        y={"550px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {s}
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                        x={"210px"}
-                                        y={"550px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {p}
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, padding: "5px", stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                        x={"310px"}
-                                        y={"550px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {e}
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                        x={"410px"}
-                                        y={"550px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {c}
-                                    </text>
+                        <div class="share-text mt-3 mb-1">Share on:</div>
 
 
-                                </svg>) : (null)
-                        }
-                        <button className="btn btn-block download-button px-2 mt-3" onClick={convertSvgToImage}><i class="fas fa-download"></i> Download Meme</button>
-                        {/* <button className="button btn btn-block download-button px-2" onClick={reset} >Create Meme</button> */}
-
-                        <div class="share-button text-center mt-4">
-
-                            <div class="share-text mt-3 mb-1">Share on:</div>
-
-
-                            <a
-                                target="_blank"
-                                style={{ color: "white" }}
-                                rel="noopener noreferrer"
-                                className="share-button mr-3"
-                                href={`https://www.facebook.com/sharer.php?u=${file}`}>
-                                <i class="fab fa-facebook-square"></i>
-                            </a>
-                            <a
-                                target="_blank"
-                                style={{ color: "white" }}
-                                rel="noopener noreferrer"
-                                className="share-button mr-3" href={`https://twitter.com/share?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com`}><i class="fab fa-twitter-square"></i></a>
-                            <a
-                                target="_blank"
-                                style={{ color: "white" }}
-                                rel="noopener noreferrer"
-                                className="share-button mr-3"
-                                href={`whatsapp://send?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com`}>
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                            <a
-                                target="_blank"
-                                style={{ color: "white" }}
-                                rel="noopener noreferrer"
-                                className="share-button mr-3"
-                                href="https://www.instagram.com">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
-                    </div>) : (null)
-                }
-            </div>
-            <div class="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <Link to="/privacy" style={{ color: "white" }}>
-                                <div class="col-md-12">
-                                    <span>TERMS OF USE/ PRIVACY</span>
-                                </div>
-                            </Link>
-                        </div>
-
-                        <div class="col-md-6 text-right">
-                            <a
-                                target="_blank"
-                                style={{ color: "white" }}
-                                rel="noopener noreferrer"
-                                className="share-button mr-3"
-                                href="https://www.facebook.com/2SureNigeria/">
-                                <i class="fab fa-facebook-square"></i>
-                            </a>
-                            <a
-                                target="_blank"
-                                style={{ color: "white" }}
-                                rel="noopener noreferrer"
-                                className="share-button mr-3"
-                                href="https://www.instagram.com/2sureng/">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a
-                                target="_blank"
-                                style={{ color: "white" }}
-                                rel="noopener noreferrer"
-                                className="share-button mr-3" href="https://www.twitter.com/2SureNG/"><i class="fab fa-twitter-square"></i></a>
-
-                        </div>
+                        <a
+                            target="_blank"
+                            style={{ color: "white" }}
+                            rel="noopener noreferrer"
+                            className="share-button mr-3"
+                            href={`https://www.facebook.com/sharer.php?u=${file}`}>
+                            <i class="fab fa-facebook-square"></i>
+                        </a>
+                        <a
+                            target="_blank"
+                            style={{ color: "white" }}
+                            rel="noopener noreferrer"
+                            className="share-button mr-3" href={`https://twitter.com/share?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com`}><i class="fab fa-twitter-square"></i></a>
+                        <a
+                            target="_blank"
+                            style={{ color: "white" }}
+                            rel="noopener noreferrer"
+                            className="share-button mr-3"
+                            href={`whatsapp://send?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com`}>
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a
+                            target="_blank"
+                            style={{ color: "white" }}
+                            rel="noopener noreferrer"
+                            className="share-button mr-3"
+                            href="https://www.instagram.com">
+                            <i class="fab fa-instagram"></i>
+                        </a>
                     </div>
-
-                </div>
+                </div>) : (null)
+            }
             </div>
+<div class="footer">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+              <Link to="/privacy" style={{color:"white"}}>
+                <div class="col-md-12">
+                  <span>TERMS OF USE/ PRIVACY</span>
+                </div>
+              </Link>
+              </div>
+
+              <div class="col-md-6 text-right">
+              <a
+            target="_blank"
+            style={{color:"white"}}
+            rel="noopener noreferrer"
+            className = "share-button mr-3"
+            href="https://www.facebook.com/2SureNigeria/">
+            <i class="fab fa-facebook-square"></i>
+          </a>
+            <a
+            target="_blank"
+            style={{color:"white"}}
+            rel="noopener noreferrer"
+            className = "share-button mr-3"
+            href="https://www.instagram.com/2sureng/">
+            <i class="fab fa-instagram"></i>
+          </a>
+              <a                         
+            target="_blank"
+            style={{color:"white"}}
+            rel="noopener noreferrer"
+            className = "share-button mr-3" href="https://www.twitter.com/2SureNG/"><i class="fab fa-twitter-square"></i></a> 
+             
+              </div>
+            </div>
+            
+          </div>
+        </div>
 
         </div >
     )
