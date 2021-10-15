@@ -217,9 +217,9 @@ export default function Meme() {
                     {
                         base64 ? (
                             <svg
-                                width={400}
+                                width={300}
                                 id="svg_ref"
-                                height={400}
+                                height={300}
                                 ref={svgRef}
                                 xmlns="http://www.w3.org/2000/svg"
                                 xmlnsXlink="http://www.w3.org/1999/xlink">

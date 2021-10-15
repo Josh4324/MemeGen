@@ -72,7 +72,7 @@ body {
 }
 
 .box {
-  width: 460px;
+  width: 360px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 50px;
@@ -122,20 +122,20 @@ h1, h2, h3, h4, h5 {
     padding: 0 14px;
     background: rgb(255 255 255 / 25%);
 }
-.meme-input{
+.form-control.meme-input{
   width: 100%;
-  background: transparent;
-  border: none;
+  background: transparent !important;
+  border: none !important;
   height: 40px;
   border-radius: 0;
-  color: #fff;
+  color: #fff !important;
 }
-.meme-input:focus{
-  background: transparent;
-  color: #fff;
-  border: 0;
+.form-control.meme-input:focus{
+  background: transparent !important;
+  color: #fff !important;
+  border: 0 !important;
     outline: none;
-    box-shadow: none;
+    box-shadow: none !important;
 }
 .upload-btn-wrapper {
   position: relative;
