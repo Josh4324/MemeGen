@@ -173,17 +173,17 @@ export default function Meme() {
                             <div className="text">S</div>
                             <input className="meme-input form-control" ref={Sref} type="text" />
                         </div>
-                        <div className="flex">
+                        <div className="flex form-group">
                             <div className="text">P</div>
-                            <input className="meme-input" ref={Pref} type="text" />
+                            <input className="meme-input form-control" ref={Pref} type="text" />
                         </div>
-                        <div className="flex">
+                        <div className="flex form-group">
                             <div className="text">E</div>
-                            <input className="meme-input" ref={Eref} type="text" />
+                            <input className="meme-input form-control" ref={Eref} type="text" />
                         </div>
-                        <div className="flex">
+                        <div className="flex form-group">
                             <div className="text">C</div>
-                            <input className="meme-input" ref={Cref} type="text" />
+                            <input className="meme-input form-control" ref={Cref} type="text" />
                         </div>
                         <button className="button" >
                             <input type="file" onChange={imageSubmit} name="file" id="file" ref={fileRef} class="input-file" />
