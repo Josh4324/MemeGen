@@ -38,7 +38,7 @@ export default function Meme() {
         stroke: "black",
         zIndex: 1,
         textTransform: "capitalize",
-        fontFamily: "Futura, Impact, Arial",
+        fontFamily: "Impact, Futura, Arial",
         fill: "#FFF",
         userSelect: "none"
     }
