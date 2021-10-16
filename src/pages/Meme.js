@@ -250,7 +250,7 @@ export default function Meme() {
                 <h3 className="spec-header">Spec Meme Generator</h3>
                 {
                     imgState === true ? (null) : (<div className="form-box">
-                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme 01</p>
+                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme 02</p>
                         <div className="flex form-group">
                             <div className="text">S</div>
                             <input className="meme-input form-control" ref={Sref} type="text" />
