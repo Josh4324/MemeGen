@@ -478,15 +478,15 @@ export default function Meme() {
             <div class="footer">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-6">
                             <Link to="/privacy" style={{ color: "white" }}>
-                                <div class="col-md-12">
+                                
                                     <span>TERMS OF USE/ PRIVACY</span>
-                                </div>
+                                
                             </Link>
                         </div>
 
-                        <div class="col-md-6 text-right">
+                        <div class="col-6 text-right">
                             <a
                                 target="_blank"
                                 style={{ color: "white" }}
