@@ -24,6 +24,17 @@ export default function Meme() {
     const [base64, setBase64] = useState("");
     const [base641, setBase641] = useState("");
     const [detail, setDetail] = useState({});
+    const boldTextStyle = {
+        fontSize: "40px", 
+        fontWeight: "bolder",
+        strokeWidth: "2",
+        stroke: "black",
+        zIndex: 1,
+        textTransform: "capitalize",
+        fontFamily: "Impact",
+        fill: "#FFF",
+        userSelect: "none"
+    }
     const textStyle = {
         fontSize: "20px",
         fontWeight: "bold",
@@ -32,21 +43,10 @@ export default function Meme() {
         userSelect: "none",
         stroke: "black",
         strokeWidth: "1.5",
-        fontFamily: "Impact, Arial",
+        fontFamily: "Impact",
         zIndex: 1,
     }
-    const boldTextStyle = {
-        fontSize: "40px", 
-        fontWeight: "bolder",
-        strokeWidth: "2",
-        stroke: "black",
-        zIndex: 1,
-        textTransform: "capitalize",
-        fontFamily: "Avenir, Futura, Arial",
-        fill: "#FFF",
-        userSelect: "none"
-    }
-
+    
     const initialState = {
         toptext: "",
         bottomtext: "",
@@ -250,7 +250,7 @@ export default function Meme() {
                 <h3 className="spec-header">Spec Meme Generator</h3>
                 {
                     imgState === true ? (null) : (<div className="form-box">
-                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme Impact</p>
+                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme Impact01</p>
                         <div className="flex form-group">
                             <div className="text">S</div>
                             <input className="meme-input form-control" ref={Sref} type="text" />
