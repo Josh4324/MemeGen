@@ -13,6 +13,7 @@ export default function Meme() {
     const svgRef = useRef("");
 
     const [file, setfile] = useState("");
+    const [rimag, setRIMG] = useState("")
     const [imgState, setImgState] = useState(false);
     const [s, setS] = useState("");
     const [p, setP] = useState("");
@@ -75,18 +76,23 @@ export default function Meme() {
         console.log(img);
         console.log(Sref, Pref, Eref, Cref)
         if (!img) {
+            fileRef.current.value = "";
             return NotificationManager.error("Please select an image", "Error");
         }
         if (Sref.current.value === "") {
+            fileRef.current.value = "";
             return NotificationManager.error("Please enter your S value", "Error")
         }
         if (Pref.current.value === "") {
+            fileRef.current.value = "";
             return NotificationManager.error("Please enter your P value", "Error")
         }
         if (Eref.current.value === "") {
+            fileRef.current.value = "";
             return NotificationManager.error("Please enter your E value", "Error")
         }
         if (Cref.current.value === "") {
+            fileRef.current.value = "";
             return NotificationManager.error("Please enter your C value", "Error")
         }
         setS(Sref.current.value);
@@ -99,11 +105,14 @@ export default function Meme() {
         console.log(base_image);
         const base64 = getBase64Image(base_image);
         setBase64(base64);
+        setTimeout(() => { convertSvgToImage2() }, 3000)
+
 
     }
 
     const convertSvgToImage = () => {
         NotificationManager.info("Downloading Meme", "info");
+        console.log(svgRef.current);
         let svgData = new XMLSerializer().serializeToString(svgRef.current);
         const canvas = document.createElement("canvas");
         canvas.setAttribute("id", "canvas");
@@ -123,9 +132,50 @@ export default function Meme() {
         };
     }
 
+    const convertSvgToImage2 = async () => {
+        console.log(svgRef.current);
+        let svgData = new XMLSerializer().serializeToString(svgRef.current);
+        const canvas = document.createElement("canvas");
+        canvas.setAttribute("id", "canvas");
+        const svgSize = svgRef.current.getBoundingClientRect();
+        canvas.width = svgSize.width;
+        canvas.height = svgSize.height;
+        const img = document.createElement("img");
+        img.setAttribute("src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData))));
+        img.onload = function async() {
+            canvas.getContext("2d").drawImage(img, 0, 0);
+            const canvasdata = canvas.toDataURL("image/png");
+            let run = async () => {
+                console.log("canvasdata", canvasdata);
+                let formData = new FormData();
+                formData.append("picture", canvasdata);
+                const result = await postImage2(formData);
+                setRIMG(result.data)
+                console.log(result);
+            }
+            run();
+
+            /* const a = document.createElement("a");
+            a.download = "meme.png";
+            a.href = canvasdata;
+            document.body.appendChild(a);
+            a.click(); */
+        };
+    }
+
     const postImage = async (userCred) => {
         try {
             const res = await axios.patch(`https://www.checkspecstatus.com/api/v1/image`, userCred);
+            console.log(res);
+            return res.data;
+        } catch (err) {
+            return err;
+        }
+    };
+
+    const postImage2 = async (userCred) => {
+        try {
+            const res = await axios.patch(`https://www.checkspecstatus.com/api/v1/image/finish`, userCred);
             console.log(res);
             return res.data;
         } catch (err) {
@@ -146,12 +196,11 @@ export default function Meme() {
         const result = await postImage(formData);
         console.log(result);
         if (result.code === 200) {
-
-            NotificationManager.success("Image Upload Successful", "Success");
             NotificationManager.info("Generating Meme", "Info")
             generateMeme(result.data);
             setfile(result.data)
         } else {
+            fileRef.current.value = "";
             NotificationManager.error("Error uploading Image", "Error")
         }
 
@@ -213,7 +262,8 @@ export default function Meme() {
 
 
                 {
-                    imgState === true ? (<div className="meme">
+                    imgState === true ? (<div className="meme" >
+
                         {
                             base64 ? (
                                 <svg
@@ -385,20 +435,20 @@ export default function Meme() {
                                 style={{ color: "white" }}
                                 rel="noopener noreferrer"
                                 className="share-button mr-3"
-                                href={`https://www.facebook.com/sharer.php?u=${file}`}>
+                                href={`https://www.facebook.com/sharer.php?u=${rimag}`}>
                                 <i class="fab fa-facebook-square"></i>
                             </a>
                             <a
                                 target="_blank"
                                 style={{ color: "white" }}
                                 rel="noopener noreferrer"
-                                className="share-button mr-3" href={`https://twitter.com/share?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com`}><i class="fab fa-twitter-square"></i></a>
+                                className="share-button mr-3" href={`https://twitter.com/share?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com,  check it out - ${rimag}`}><i class="fab fa-twitter-square"></i></a>
                             <a
                                 target="_blank"
                                 style={{ color: "white" }}
                                 rel="noopener noreferrer"
                                 className="share-button mr-3"
-                                href={`whatsapp://send?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com`}>
+                                href={`whatsapp://send?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com, check it out - ${rimag}`}>
                                 <i class="fab fa-whatsapp"></i>
                             </a>
                             <a
@@ -413,6 +463,7 @@ export default function Meme() {
                     </div>) : (null)
                 }
             </div>
+
             <div class="footer">
                 <div class="container">
                     <div class="row">
