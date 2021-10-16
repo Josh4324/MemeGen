@@ -308,7 +308,7 @@ export default function Meme() {
 
 
                                     <text
-                                        style={{ ...textStyle, fontFamily: "Impact, Arial", zIndex: 1, stroke: "black", strokeWidth: "2", fontSize: "40px", fontWeight: "bolder" }}
+                                        style={{ ...textStyle, fontFamily: "Impact", zIndex: 1, stroke: "black", strokeWidth: "2", fontSize: "40px", fontWeight: "bolder" }}
                                         x={"39px"}
                                         y={"115px"}
                                         dominantBaseline="middle"
@@ -326,7 +326,7 @@ export default function Meme() {
                                         {s}
                                     </text>
                                     <text
-                                        style={{ ...textStyle, fontFamily: "Impact, Arial", stroke: "black", strokeWidth: "2", fontSize: "40px", fontWeight: "bolder", zIndex: 1 }}
+                                        style={{ ...textStyle, fontFamily: "Impact", stroke: "black", strokeWidth: "2", fontSize: "40px", fontWeight: "bolder", zIndex: 1 }}
                                         x={"39px"}
                                         y={"160px"}
                                         dominantBaseline="middle"
