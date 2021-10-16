@@ -305,12 +305,12 @@ export default function Meme() {
 
 
                                     <rect x={"39px"}
-                                        y={"70px"} height="20" width="52" style={{ fill: "white" }}>
+                                        y={"70px"} height="17" width="52" style={{ fill: "white" }}>
                                     </rect>
                                     <text
                                         style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Arial", fontSize: "12px", fontWeight: "normal" }}
                                         x={"45px"}
-                                        y={"81px"}
+                                        y={"80px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
