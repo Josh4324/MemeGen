@@ -29,7 +29,11 @@ export default function Meme() {
         fontWeight: "bold",
         textTransform: "lowercase",
         fill: "#FFF",
-        userSelect: "none"
+        userSelect: "none",
+        stroke: "black",
+        strokeWidth: "1.5",
+        fontFamily: "Futura, Arial",
+        zIndex: 1,
     }
     const boldTextStyle = {
         fontSize: "40px", 
@@ -328,7 +332,7 @@ export default function Meme() {
                                         s
                                     </text>
                                     <text
-                                        style={{ ...textStyle, zIndex: 1, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial" }}
+                                        style={{ ...textStyle }}
                                         x={"69px"}
                                         y={"119px"}
                                         dominantBaseline="middle"
@@ -346,7 +350,7 @@ export default function Meme() {
                                         p
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial", zIndex: 1 }}
+                                        style={{ ...textStyle }}
                                         x={"69px"}
                                         y={"162px"}
                                         dominantBaseline="middle"
@@ -364,7 +368,7 @@ export default function Meme() {
                                         e
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial", zIndex: 1 }}
+                                        style={{ ...textStyle }}
                                         x={"69px"}
                                         y={"208px"}
                                         dominantBaseline="middle"
@@ -382,7 +386,7 @@ export default function Meme() {
                                         c
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial", zIndex: 1 }}
+                                        style={{ ...textStyle }}
                                         x={"69px"}
                                         y={"253px"}
                                         dominantBaseline="middle"
