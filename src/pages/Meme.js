@@ -330,7 +330,7 @@ export default function Meme() {
                                     <text
                                         style={{ ...textStyle, zIndex: 1, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial" }}
                                         x={"69px"}
-                                        y={"115px"}
+                                        y={"119px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -348,7 +348,7 @@ export default function Meme() {
                                     <text
                                         style={{ ...textStyle, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial", zIndex: 1 }}
                                         x={"69px"}
-                                        y={"160px"}
+                                        y={"162px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -366,7 +366,7 @@ export default function Meme() {
                                     <text
                                         style={{ ...textStyle, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial", zIndex: 1 }}
                                         x={"69px"}
-                                        y={"205px"}
+                                        y={"208px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -384,7 +384,7 @@ export default function Meme() {
                                     <text
                                         style={{ ...textStyle, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial", zIndex: 1 }}
                                         x={"69px"}
-                                        y={"250px"}
+                                        y={"253px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
