@@ -25,7 +25,7 @@ export default function Meme() {
     const [base641, setBase641] = useState("");
     const [detail, setDetail] = useState({});
     const boldTextStyle = {
-        fontSize: "40px", 
+        fontSize: "40px",
         fontWeight: "bolder",
         strokeWidth: "2",
         stroke: "black",
@@ -46,7 +46,7 @@ export default function Meme() {
         fontFamily: "Arial",
         zIndex: 1,
     }
-    
+
     const initialState = {
         toptext: "",
         bottomtext: "",
@@ -71,14 +71,17 @@ export default function Meme() {
         img.crossOrigin = '*';
         img.onload = () => {
             const canvas = document.createElement("canvas");
+            console.log("size")
+            console.log(img.width);
+            console.log(img.height)
             canvas.width = img.width;
             setWidth(img.width);
             canvas.height = img.height;
             setHeight(img.height)
             const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, 400, 400)
+            ctx.drawImage(img, 0, 0, 600, 600)
             console.log("can", canvas);
-            const dataURL = canvas.toDataURL("image/png");
+            const dataURL = canvas.toDataURL("image/jpeg", 1.0);
             console.log(dataURL);
             setImgState(true);
             setBase64(dataURL);
@@ -120,7 +123,7 @@ export default function Meme() {
         console.log(base_image);
         const base64 = getBase64Image(base_image);
         setBase64(base64);
-        setTimeout(() => { convertSvgToImage2() }, 3000)
+        setTimeout(() => { convertSvgToImage2() }, 6000)
 
 
     }
@@ -138,7 +141,7 @@ export default function Meme() {
         img.setAttribute("src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData))));
         img.onload = function () {
             canvas.getContext("2d").drawImage(img, 0, 0);
-            const canvasdata = canvas.toDataURL("image/png");
+            const canvasdata = canvas.toDataURL("image/jpeg", 1.0);
             const a = document.createElement("a");
             a.download = "meme.png";
             a.href = canvasdata;
@@ -159,7 +162,7 @@ export default function Meme() {
         img.setAttribute("src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData))));
         img.onload = function async() {
             canvas.getContext("2d").drawImage(img, 0, 0);
-            const canvasdata = canvas.toDataURL("image/png");
+            const canvasdata = canvas.toDataURL("image/jpeg", 1.0);
             let run = async () => {
                 console.log("canvasdata", canvasdata);
                 let formData = new FormData();
@@ -180,7 +183,7 @@ export default function Meme() {
 
     const postImage = async (userCred) => {
         try {
-            const res = await axios.patch(`https://www.checkspecstatus.com/api/v1/image`, userCred);
+            const res = await axios.patch(`http://localhost:8081/api/v1/image`, userCred);
             console.log(res);
             return res.data;
         } catch (err) {
@@ -190,7 +193,7 @@ export default function Meme() {
 
     const postImage2 = async (userCred) => {
         try {
-            const res = await axios.patch(`https://www.checkspecstatus.com/api/v1/image/finish`, userCred);
+            const res = await axios.patch(`http://localhost:8081/api/v1/image/finish`, userCred);
             console.log(res);
             return res.data;
         } catch (err) {
@@ -282,9 +285,9 @@ export default function Meme() {
                         {
                             base64 ? (
                                 <svg
-                                    width={300}
+                                    width={600}
                                     id="svg_ref"
-                                    height={300}
+                                    height={600}
                                     ref={svgRef}
                                     xmlns="http://www.w3.org/2000/svg"
                                     xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -294,8 +297,8 @@ export default function Meme() {
 
                                     <g> <image
                                         xlinkHref={base64}
-                                        height={300}
-                                        width={300}
+                                        height={600}
+                                        width={600}
                                     /></g>
                                     <g>
                                         <rect x={"15px"}
@@ -359,7 +362,7 @@ export default function Meme() {
                                         {p}
                                     </text>
                                     <text
-                                        style={{ ...boldTextStyle  }}
+                                        style={{ ...boldTextStyle }}
                                         x={"39px"}
                                         y={"205px"}
                                         dominantBaseline="middle"
@@ -377,7 +380,7 @@ export default function Meme() {
                                         {e}
                                     </text>
                                     <text
-                                        style={{  ...boldTextStyle  }}
+                                        style={{ ...boldTextStyle }}
                                         x={"39px"}
                                         y={"250px"}
                                         dominantBaseline="middle"
@@ -484,9 +487,9 @@ export default function Meme() {
                     <div class="row">
                         <div class="col-6">
                             <Link to="/privacy" style={{ color: "white" }}>
-                                
-                                    <span>TERMS OF USE/ PRIVACY</span>
-                                
+
+                                <span>TERMS OF USE/ PRIVACY</span>
+
                             </Link>
                         </div>
 
