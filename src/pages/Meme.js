@@ -31,7 +31,7 @@ export default function Meme() {
         stroke: "black",
         zIndex: 1,
         textTransform: "capitalize",
-        fontFamily: "Helvetica",
+        fontFamily: "Verdana",
         fill: "#FFF",
         userSelect: "none"
     }
@@ -43,7 +43,7 @@ export default function Meme() {
         userSelect: "none",
         stroke: "black",
         strokeWidth: "1.5",
-        fontFamily: "Helvetica",
+        fontFamily: "Verdana",
         zIndex: 1,
     }
     
@@ -250,7 +250,7 @@ export default function Meme() {
                 <h3 className="spec-header">Spec Meme Generator</h3>
                 {
                     imgState === true ? (null) : (<div className="form-box">
-                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme Helvetica</p>
+                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme Verdana</p>
                         <div className="flex form-group">
                             <div className="text">S</div>
                             <input className="meme-input form-control" ref={Sref} type="text" />
