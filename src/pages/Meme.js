@@ -24,12 +24,27 @@ export default function Meme() {
     const [base64, setBase64] = useState("");
     const [base641, setBase641] = useState("");
     const [detail, setDetail] = useState({});
-    const textStyle = {
-        fontSize: "25px",
-        fontWeight: "bold",
+    const boldTextStyle = {
+        fontSize: "40px",
+        fontWeight: "bolder",
+        strokeWidth: "2",
+        stroke: "black",
+        zIndex: 1,
         textTransform: "capitalize",
+        fontFamily: "Arial Black",
         fill: "#FFF",
         userSelect: "none"
+    }
+    const textStyle = {
+        fontSize: "20px",
+        fontWeight: "bold",
+        textTransform: "lowercase",
+        fill: "#FFF",
+        userSelect: "none",
+        stroke: "black",
+        strokeWidth: "1.5",
+        fontFamily: "Arial Black",
+        zIndex: 1,
     }
 
     const initialState = {
@@ -238,7 +253,7 @@ export default function Meme() {
                 <h3 className="spec-header">Spec Meme Generator</h3>
                 {
                     imgState === true ? (null) : (<div className="form-box">
-                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme</p>
+                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme 'Arial Black'</p>
                         <div className="flex form-group">
                             <div className="text">S</div>
                             <input className="meme-input form-control" ref={Sref} type="text" />
@@ -297,12 +312,12 @@ export default function Meme() {
 
 
                                     <rect x={"39px"}
-                                        y={"45px"} height="20" width="52" style={{ fill: "white" }}>
+                                        y={"70px"} height="17" width="52" style={{ fill: "white" }}>
                                     </rect>
                                     <text
                                         style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Arial", fontSize: "12px", fontWeight: "normal" }}
                                         x={"45px"}
-                                        y={"55px"}
+                                        y={"80px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -311,61 +326,61 @@ export default function Meme() {
 
 
                                     <text
-                                        style={{ ...textStyle, fontFamily: "Impact", zIndex: 1, stroke: "black", strokeWidth: "2", fontSize: "50px", fontWeight: "bolder" }}
+                                        style={{ ...boldTextStyle }}
                                         x={"39px"}
-                                        y={"100px"}
+                                        y={"115px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         s
                                     </text>
                                     <text
-                                        style={{ ...textStyle, zIndex: 1, stroke: "black", strokeWidth: "1", fontFamily: "Arial" }}
-                                        x={"79px"}
-                                        y={"100px"}
+                                        style={{ ...textStyle }}
+                                        x={"69px"}
+                                        y={"119px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         {s}
                                     </text>
                                     <text
-                                        style={{ ...textStyle, fontFamily: "Impact", stroke: "black", strokeWidth: "2", fontSize: "50px", fontWeight: "bolder", zIndex: 1 }}
+                                        style={{ ...boldTextStyle }}
                                         x={"39px"}
-                                        y={"150px"}
+                                        y={"160px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         p
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"79px"}
-                                        y={"150px"}
+                                        style={{ ...textStyle }}
+                                        x={"69px"}
+                                        y={"162px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         {p}
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "50px", fontWeight: "bolder", zIndex: 1 }}
+                                        style={{ ...boldTextStyle }}
                                         x={"39px"}
-                                        y={"200px"}
+                                        y={"205px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         e
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"79px"}
-                                        y={"200px"}
+                                        style={{ ...textStyle }}
+                                        x={"69px"}
+                                        y={"208px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         {e}
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "50px", fontWeight: "bolder", zIndex: 1 }}
+                                        style={{ ...boldTextStyle }}
                                         x={"39px"}
                                         y={"250px"}
                                         dominantBaseline="middle"
@@ -374,9 +389,9 @@ export default function Meme() {
                                         c
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"79px"}
-                                        y={"250px"}
+                                        style={{ ...textStyle }}
+                                        x={"69px"}
+                                        y={"253px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -470,15 +485,15 @@ export default function Meme() {
             <div class="footer">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-6">
                             <Link to="/privacy" style={{ color: "white" }}>
-                                <div class="col-md-12">
-                                    <span>TERMS OF USE/ PRIVACY</span>
-                                </div>
+
+                                <span>TERMS OF USE/ PRIVACY</span>
+
                             </Link>
                         </div>
 
-                        <div class="col-md-6 text-right">
+                        <div class="col-6 text-right">
                             <a
                                 target="_blank"
                                 style={{ color: "white" }}
