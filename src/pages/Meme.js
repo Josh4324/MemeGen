@@ -31,7 +31,7 @@ export default function Meme() {
         stroke: "black",
         zIndex: 1,
         textTransform: "capitalize",
-        fontFamily: "Trebuchet MS",
+        fontFamily: "Arial Black",
         fill: "#FFF",
         userSelect: "none"
     }
@@ -43,7 +43,7 @@ export default function Meme() {
         userSelect: "none",
         stroke: "black",
         strokeWidth: "1.5",
-        fontFamily: "Trebuchet MS",
+        fontFamily: "Arial Black",
         zIndex: 1,
     }
     
@@ -250,7 +250,7 @@ export default function Meme() {
                 <h3 className="spec-header">Spec Meme Generator</h3>
                 {
                     imgState === true ? (null) : (<div className="form-box">
-                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme 'Trebuchet MS'</p>
+                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme 'Arial Black'</p>
                         <div className="flex form-group">
                             <div className="text">S</div>
                             <input className="meme-input form-control" ref={Sref} type="text" />
