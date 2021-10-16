@@ -27,7 +27,7 @@ export default function Meme() {
     const textStyle = {
         fontSize: "20px",
         fontWeight: "bold",
-        textTransform: "capitalize",
+        textTransform: "lowercase",
         fill: "#FFF",
         userSelect: "none"
     }
