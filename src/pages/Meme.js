@@ -442,7 +442,9 @@ export default function Meme() {
 
                                 </svg>) : (null)
                         }
+                        
                         <button className="btn btn-block download-button px-2 mt-3" onClick={convertSvgToImage}><i class="fas fa-download"></i> Download Meme</button>
+                        <img src="images/loading.gif" />
                         {/* <button className="button btn btn-block download-button px-2" onClick={reset} >Create Meme</button> */}
 
                         <div class="share-button text-center mt-4">

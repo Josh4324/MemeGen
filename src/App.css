@@ -40,6 +40,8 @@ body {
   position: relative;
   padding-top: 50px;
   padding-bottom: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .App-header {
@@ -72,7 +74,7 @@ body {
 }
 
 .box {
-  width: 600px;
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 50px;
@@ -172,7 +174,17 @@ h1, h2, h3, h4, h5 {
   margin-left:auto;
   margin-right: auto;
   margin-bottom: 30px;
+  position: relative;
 }
+.meme img {
+  max-width: 100%;
+}
+.meme svg {
+  visibility: hidden;
+  position: absolute;
+  top: 0px;
+}
+
 .home-spec-info {
   padding: 20px 30px 30px;
   border: 1px solid rgb(50 176 3/95%);
