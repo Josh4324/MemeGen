@@ -25,7 +25,7 @@ export default function Meme() {
     const [base641, setBase641] = useState("");
     const [detail, setDetail] = useState({});
     const textStyle = {
-        fontSize: "30px",
+        fontSize: "25px",
         fontWeight: "bold",
         textTransform: "capitalize",
         fill: "#FFF",
@@ -294,12 +294,12 @@ export default function Meme() {
 
 
                                     <rect x={"39px"}
-                                        y={"30px"} height="30" width="80" style={{ fill: "white" }}>
+                                        y={"45px"} height="20" width="52" style={{ fill: "white" }}>
                                     </rect>
                                     <text
-                                        style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Futura", fontSize: "20px", fontWeight: "bolder" }}
-                                        x={"48px"}
-                                        y={"45px"}
+                                        style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Arial", fontSize: "12px", fontWeight: "normal" }}
+                                        x={"45px"}
+                                        y={"55px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -309,7 +309,7 @@ export default function Meme() {
 
                                     <text
                                         style={{ ...textStyle, fontFamily: "Impact", zIndex: 1, stroke: "black", strokeWidth: "2", fontSize: "50px", fontWeight: "bolder" }}
-                                        x={"50px"}
+                                        x={"39px"}
                                         y={"100px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
@@ -318,7 +318,7 @@ export default function Meme() {
                                     </text>
                                     <text
                                         style={{ ...textStyle, zIndex: 1, stroke: "black", strokeWidth: "2", fontFamily: "Arial" }}
-                                        x={"90px"}
+                                        x={"79px"}
                                         y={"100px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
@@ -327,7 +327,7 @@ export default function Meme() {
                                     </text>
                                     <text
                                         style={{ ...textStyle, fontFamily: "Impact", stroke: "black", strokeWidth: "2", fontSize: "50px", fontWeight: "bolder", zIndex: 1 }}
-                                        x={"50px"}
+                                        x={"39px"}
                                         y={"150px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
@@ -336,7 +336,7 @@ export default function Meme() {
                                     </text>
                                     <text
                                         style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"90px"}
+                                        x={"79px"}
                                         y={"150px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
@@ -345,7 +345,7 @@ export default function Meme() {
                                     </text>
                                     <text
                                         style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "50px", fontWeight: "bolder", zIndex: 1 }}
-                                        x={"50px"}
+                                        x={"39px"}
                                         y={"200px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
@@ -354,7 +354,7 @@ export default function Meme() {
                                     </text>
                                     <text
                                         style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"90px"}
+                                        x={"79px"}
                                         y={"200px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
@@ -363,7 +363,7 @@ export default function Meme() {
                                     </text>
                                     <text
                                         style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "50px", fontWeight: "bolder", zIndex: 1 }}
-                                        x={"50px"}
+                                        x={"39px"}
                                         y={"250px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
@@ -372,7 +372,7 @@ export default function Meme() {
                                     </text>
                                     <text
                                         style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"90px"}
+                                        x={"79px"}
                                         y={"250px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
@@ -442,7 +442,7 @@ export default function Meme() {
                                 target="_blank"
                                 style={{ color: "white" }}
                                 rel="noopener noreferrer"
-                                className="share-button mr-3" href={`https://twitter.com/share?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com,  check it out - ${rimag}`}><i class="fab fa-twitter-square"></i></a>
+                                className="share-button mr-3" href={`https://twitter.com/share?text=I just checked generated my spec meme. You can generate yours at at https://meme.checkspecstatus.com, check it out - ${rimag}`}><i class="fab fa-twitter-square"></i></a>
                             <a
                                 target="_blank"
                                 style={{ color: "white" }}
