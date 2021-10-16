@@ -281,7 +281,9 @@ export default function Meme() {
 
                 {
                     imgState === true ? (<div className="meme" >
-
+                        {
+                            rimag.length > 0 ? (<img src={rimag} />) : null
+                        }
                         {
                             base64 ? (
                                 <svg
