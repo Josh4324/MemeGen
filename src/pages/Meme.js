@@ -32,7 +32,7 @@ export default function Meme() {
         userSelect: "none",
         stroke: "black",
         strokeWidth: "1.5",
-        fontFamily: "Futura, Arial",
+        fontFamily: "Avenir, Arial",
         zIndex: 1,
     }
     const boldTextStyle = {
@@ -42,7 +42,7 @@ export default function Meme() {
         stroke: "black",
         zIndex: 1,
         textTransform: "capitalize",
-        fontFamily: "Impact, Futura, Arial",
+        fontFamily: "Avenir, Futura, Arial",
         fill: "#FFF",
         userSelect: "none"
     }
