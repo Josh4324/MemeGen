@@ -25,7 +25,7 @@ export default function Meme() {
     const [base641, setBase641] = useState("");
     const [detail, setDetail] = useState({});
     const textStyle = {
-        fontSize: "25px",
+        fontSize: "20px",
         fontWeight: "bold",
         textTransform: "capitalize",
         fill: "#FFF",
@@ -294,12 +294,12 @@ export default function Meme() {
 
 
                                     <rect x={"39px"}
-                                        y={"45px"} height="20" width="52" style={{ fill: "white" }}>
+                                        y={"70px"} height="20" width="52" style={{ fill: "white" }}>
                                     </rect>
                                     <text
                                         style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Arial", fontSize: "12px", fontWeight: "normal" }}
                                         x={"45px"}
-                                        y={"55px"}
+                                        y={"81px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -308,61 +308,61 @@ export default function Meme() {
 
 
                                     <text
-                                        style={{ ...textStyle, fontFamily: "Impact", zIndex: 1, stroke: "black", strokeWidth: "2", fontSize: "50px", fontWeight: "bolder" }}
+                                        style={{ ...textStyle, fontFamily: "Impact", zIndex: 1, stroke: "black", strokeWidth: "2", fontSize: "40px", fontWeight: "bolder" }}
                                         x={"39px"}
-                                        y={"100px"}
+                                        y={"115px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         s
                                     </text>
                                     <text
-                                        style={{ ...textStyle, zIndex: 1, stroke: "black", strokeWidth: "2", fontFamily: "Arial" }}
-                                        x={"79px"}
-                                        y={"100px"}
+                                        style={{ ...textStyle, zIndex: 1, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial" }}
+                                        x={"69px"}
+                                        y={"115px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         {s}
                                     </text>
                                     <text
-                                        style={{ ...textStyle, fontFamily: "Impact", stroke: "black", strokeWidth: "2", fontSize: "50px", fontWeight: "bolder", zIndex: 1 }}
+                                        style={{ ...textStyle, fontFamily: "Impact", stroke: "black", strokeWidth: "2", fontSize: "40px", fontWeight: "bolder", zIndex: 1 }}
                                         x={"39px"}
-                                        y={"150px"}
+                                        y={"160px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         p
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"79px"}
-                                        y={"150px"}
+                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial", zIndex: 1 }}
+                                        x={"69px"}
+                                        y={"160px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         {p}
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "50px", fontWeight: "bolder", zIndex: 1 }}
+                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "40px", fontWeight: "bolder", zIndex: 1 }}
                                         x={"39px"}
-                                        y={"200px"}
+                                        y={"205px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         e
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"79px"}
-                                        y={"200px"}
+                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial", zIndex: 1 }}
+                                        x={"69px"}
+                                        y={"205px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         {e}
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "50px", fontWeight: "bolder", zIndex: 1 }}
+                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Impact", fontSize: "40px", fontWeight: "bolder", zIndex: 1 }}
                                         x={"39px"}
                                         y={"250px"}
                                         dominantBaseline="middle"
@@ -371,8 +371,8 @@ export default function Meme() {
                                         c
                                     </text>
                                     <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "2", fontFamily: "Arial", zIndex: 1 }}
-                                        x={"79px"}
+                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1.5", fontFamily: "Arial", zIndex: 1 }}
+                                        x={"69px"}
                                         y={"250px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
