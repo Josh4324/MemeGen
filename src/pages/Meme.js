@@ -64,25 +64,55 @@ export default function Meme() {
         console.log("render")
         return () => {
         }
-    }, [base64])
+    }, [])
 
-    const getBase64Image = (img) => {
-        console.log(img)
+    const getBase64Image = async (img, s, p, e, c) => {
         img.crossOrigin = '*';
-        img.onload = () => {
-            const canvas = document.createElement("canvas");
-            console.log("size")
-            console.log(img.width);
-            console.log(img.height)
+        img.onload = async () => {
+            //const canvas1 = document.createElement("canvas");
+            const canvas = document.getElementById("canvas")
             canvas.width = img.width;
             setWidth(img.width);
             canvas.height = img.height;
             setHeight(img.height)
             const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, 600, 600)
+            ctx.drawImage(img, 0, 0, 600, 600);
+            ctx.globalAlpha = 0.4;
+            ctx.fillStyle = "green";
+            ctx.fillRect(0, 0, 600, 600);
+
+            ctx.strokeStyle = 'green';
+            ctx.strokeRect(15, 15, 570, 570);
+
+            ctx.fillStyle = "white";
+            ctx.globalAlpha = 1;
+            ctx.font = "40px GothamCond-Black";
+            ctx.fillText("S", 50, 100);
+            ctx.font = "20px Futura";
+            ctx.fillText(s, 100, 90);
+            ctx.font = "40px GothamCond-Black";
+            ctx.fillText("P", 50, 150);
+            ctx.font = "20px Futura";
+            ctx.fillText(p, 100, 140);
+            ctx.font = "40px GothamCond-Black";
+            ctx.fillText("E", 50, 200);
+            ctx.font = "20px Futura";
+            ctx.fillText(e, 100, 190);
+            ctx.font = "40px GothamCond-Black";
+            ctx.fillText("C", 50, 250);
+            ctx.font = "20px Futura";
+            ctx.fillText(c, 100, 240);
+
+
+
             console.log("can", canvas);
             const dataURL = canvas.toDataURL("image/jpeg", 1.0);
-            console.log(dataURL);
+
+            let formData = new FormData();
+            formData.append("picture", dataURL);
+            const result = await postImage2(formData);
+            console.log(result.data);
+            setRIMG(result.data);
             setImgState(true);
             setBase64(dataURL);
             return dataURL;
@@ -90,29 +120,8 @@ export default function Meme() {
 
     }
 
-    const generateMeme = (img) => {
-        console.log(img);
-        console.log(Sref, Pref, Eref, Cref)
-        if (!img) {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please select an image", "Error");
-        }
-        if (Sref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your S value", "Error")
-        }
-        if (Pref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your P value", "Error")
-        }
-        if (Eref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your E value", "Error")
-        }
-        if (Cref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your C value", "Error")
-        }
+    const generateMeme = async (img) => {
+        console.log(Sref.current.value, Pref.current.value)
         setS(Sref.current.value);
         setP(Pref.current.value);
         setE(Eref.current.value);
@@ -121,33 +130,74 @@ export default function Meme() {
         const base_image = new Image();
         base_image.src = image;
         console.log(base_image);
-        const base64 = getBase64Image(base_image);
-        setBase64(base64);
-        setTimeout(() => { convertSvgToImage2() }, 6000)
+        const base64 = getBase64Image(base_image, Sref.current.value, Pref.current.value, Eref.current.value, Cref.current.value);
+        //setBase64(base64);
 
+    }
+
+    const DgenerateMeme = async (img) => {
+        const image = img;
+        const base_image = new Image();
+        base_image.src = image;
+        const base64 = DgetBase64Image(base_image);
+        setBase64(base64);
+
+    }
+
+    const DgetBase64Image = async (img) => {
+        img.crossOrigin = '*';
+        img.onload = async () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            setWidth(img.width);
+            canvas.height = img.height;
+            setHeight(img.height)
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, 600, 600);
+            ctx.globalAlpha = 0.4;
+            ctx.fillStyle = "green";
+            ctx.fillRect(0, 0, 600, 600);
+
+            ctx.strokeStyle = 'green';
+            ctx.strokeRect(15, 15, 570, 570);
+
+            ctx.fillStyle = "white";
+            ctx.globalAlpha = 1;
+            ctx.font = "40px GothamCond";
+            ctx.fillText("S", 30, 50);
+
+            ctx.font = "40px GothamCond";
+            ctx.fillText("P", 30, 100);
+            ctx.fillText("E", 30, 150);
+            ctx.fillText("C", 30, 200);
+
+
+
+            console.log("can", canvas);
+            const dataURL = canvas.toDataURL("image/jpeg", 1.0);
+
+            const a = document.createElement("a");
+            a.download = "meme.jpg";
+            a.href = dataURL;
+            document.body.appendChild(a);
+            a.click();
+            setImgState(true);
+            setBase64(dataURL);
+            return dataURL;
+        }
 
     }
 
     const convertSvgToImage = () => {
         NotificationManager.info("Downloading Meme", "info");
-        console.log(svgRef.current);
-        let svgData = new XMLSerializer().serializeToString(svgRef.current);
-        const canvas = document.createElement("canvas");
-        canvas.setAttribute("id", "canvas");
-        const svgSize = svgRef.current.getBoundingClientRect();
-        canvas.width = svgSize.width;
-        canvas.height = svgSize.height;
-        const img = document.createElement("img");
-        img.setAttribute("src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData))));
-        img.onload = function () {
-            canvas.getContext("2d").drawImage(img, 0, 0);
-            const canvasdata = canvas.toDataURL("image/jpeg", 1.0);
-            const a = document.createElement("a");
-            a.download = "meme.png";
-            a.href = canvasdata;
-            document.body.appendChild(a);
-            a.click();
-        };
+        const canvas = document.getElementById("canvas")
+        const dataURL = canvas.toDataURL("image/jpeg", 1.0);
+        const a = document.createElement("a");
+        a.download = "meme.png";
+        a.href = dataURL;
+        document.body.appendChild(a);
+        a.click();
+
     }
 
     const convertSvgToImage2 = async () => {
@@ -202,6 +252,23 @@ export default function Meme() {
     };
 
     const imageSubmit = async (evt) => {
+        if (Sref.current.value === "") {
+            fileRef.current.value = "";
+            return NotificationManager.error("Please enter your S value", "Error")
+        }
+        if (Pref.current.value === "") {
+            fileRef.current.value = "";
+            return NotificationManager.error("Please enter your P value", "Error")
+        }
+        if (Eref.current.value === "") {
+            fileRef.current.value = "";
+            return NotificationManager.error("Please enter your E value", "Error")
+        }
+        if (Cref.current.value === "") {
+            fileRef.current.value = "";
+            return NotificationManager.error("Please enter your C value", "Error")
+        }
+        setS(Sref.current.value);
         NotificationManager.info("Image Upload in progress", "Info")
         evt.preventDefault();
 
@@ -222,10 +289,6 @@ export default function Meme() {
             NotificationManager.error("Error uploading Image", "Error")
         }
 
-    }
-
-    const reset = () => {
-        setImgState(false);
     }
 
 
@@ -272,16 +335,19 @@ export default function Meme() {
                         </div>
                         <div className="upload-btn-wrapper">
                             <button class="btn"><i class="fas fa-camera"></i> Upload your photo</button>
-                            <input type="file" onChange={imageSubmit} name="file" id="file" ref={fileRef} class="input-file" />
+                            <input type="file" onChange={imageSubmit} name="file" accept="image/png, image/jpeg" id="file" ref={fileRef} class="input-file" />
                         </div>
                     </div>)
                 }
 
-
-
+                <canvas id="canvas" />
                 {
                     imgState === true ? (<div className="meme" >
+
+                        <img src={rimag} />
+                        <button className="btn btn-block download-button px-2 mt-3" onClick={convertSvgToImage}><i class="fas fa-download"></i> Download Meme</button>
                         {
+<<<<<<< HEAD
                             rimag.length > 0 ? (<img src={rimag} />) : null
                         }
                         {
@@ -445,6 +511,11 @@ export default function Meme() {
                         
                         <button className="btn btn-block download-button px-2 mt-3" onClick={convertSvgToImage}><i class="fas fa-download"></i> Download Meme</button>
                         {/* <img src="images/loading.gif" /> */}
+=======
+                            rimag.length === 0 ? (<img src="images/loading.gif" />) : null
+                        }
+
+>>>>>>> 463b53ee4fd7354ef5c581ce25adf02f13e92acc
                         {/* <button className="button btn btn-block download-button px-2" onClick={reset} >Create Meme</button> */}
 
                         <div class="share-button text-center mt-4">
@@ -485,6 +556,8 @@ export default function Meme() {
                     </div>) : (null)
                 }
             </div>
+
+
 
             <div class="footer">
                 <div class="container">
