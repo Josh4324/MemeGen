@@ -9,7 +9,7 @@
 }
 
 body {
-  font-family: "Futura", arial;
+  font-family: "Futura", arial !important;
 }
 
 .App {
