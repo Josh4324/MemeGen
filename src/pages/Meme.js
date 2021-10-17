@@ -70,18 +70,36 @@ export default function Meme() {
         console.log(img)
         img.crossOrigin = '*';
         img.onload = () => {
-            const canvas = document.createElement("canvas");
-            console.log("size")
-            console.log(img.width);
-            console.log(img.height)
+            //const canvas1 = document.createElement("canvas");
+            const canvas = document.getElementById("canvas")
             canvas.width = img.width;
             setWidth(img.width);
             canvas.height = img.height;
             setHeight(img.height)
             const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, 600, 600)
+            ctx.drawImage(img, 0, 0, 600, 600);
+            ctx.globalAlpha = 0.4;
+            ctx.fillStyle = "green";
+            ctx.fillRect(0, 0, 600, 600);
+
+            ctx.strokeStyle = 'green';
+            ctx.strokeRect(15, 15, 570, 570);
+
+            ctx.fillStyle = "white";
+            ctx.globalAlpha = 1;
+            ctx.font = "30px Futura";
+            ctx.fillText("Hello World", 10, 50);
+
+
+
             console.log("can", canvas);
             const dataURL = canvas.toDataURL("image/jpeg", 1.0);
+
+            const a = document.createElement("a");
+            a.download = "meme.jpg";
+            a.href = dataURL;
+            document.body.appendChild(a);
+            a.click();
             console.log(dataURL);
             setImgState(true);
             setBase64(dataURL);
@@ -93,26 +111,7 @@ export default function Meme() {
     const generateMeme = (img) => {
         console.log(img);
         console.log(Sref, Pref, Eref, Cref)
-        if (!img) {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please select an image", "Error");
-        }
-        if (Sref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your S value", "Error")
-        }
-        if (Pref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your P value", "Error")
-        }
-        if (Eref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your E value", "Error")
-        }
-        if (Cref.current.value === "") {
-            fileRef.current.value = "";
-            return NotificationManager.error("Please enter your C value", "Error")
-        }
+
         setS(Sref.current.value);
         setP(Pref.current.value);
         setE(Eref.current.value);
@@ -141,6 +140,8 @@ export default function Meme() {
         img.setAttribute("src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData))));
         img.onload = function () {
             canvas.getContext("2d").drawImage(img, 0, 0);
+            canvas.getContext("2d").font("30px Futura");
+
             const canvasdata = canvas.toDataURL("image/jpeg", 1.0);
             const a = document.createElement("a");
             a.download = "meme.png";
@@ -202,6 +203,22 @@ export default function Meme() {
     };
 
     const imageSubmit = async (evt) => {
+        if (Sref.current.value === "") {
+            fileRef.current.value = "";
+            return NotificationManager.error("Please enter your S value", "Error")
+        }
+        if (Pref.current.value === "") {
+            fileRef.current.value = "";
+            return NotificationManager.error("Please enter your P value", "Error")
+        }
+        if (Eref.current.value === "") {
+            fileRef.current.value = "";
+            return NotificationManager.error("Please enter your E value", "Error")
+        }
+        if (Cref.current.value === "") {
+            fileRef.current.value = "";
+            return NotificationManager.error("Please enter your C value", "Error")
+        }
         NotificationManager.info("Image Upload in progress", "Info")
         evt.preventDefault();
 
@@ -222,10 +239,6 @@ export default function Meme() {
             NotificationManager.error("Error uploading Image", "Error")
         }
 
-    }
-
-    const reset = () => {
-        setImgState(false);
     }
 
 
@@ -272,7 +285,7 @@ export default function Meme() {
                         </div>
                         <div className="upload-btn-wrapper">
                             <button class="btn"><i class="fas fa-camera"></i> Upload your photo</button>
-                            <input type="file" onChange={imageSubmit} name="file" id="file" ref={fileRef} class="input-file" />
+                            <input type="file" onChange={imageSubmit} name="file" accept="image/png, image/jpeg" id="file" ref={fileRef} class="input-file" />
                         </div>
                     </div>)
                 }
@@ -281,9 +294,7 @@ export default function Meme() {
 
                 {
                     imgState === true ? (<div className="meme" >
-                        {
-                            rimag.length > 0 ? (<img src={rimag} />) : null
-                        }
+
                         {
                             base64 ? (
                                 <svg
@@ -483,6 +494,8 @@ export default function Meme() {
                     </div>) : (null)
                 }
             </div>
+
+            <canvas id="canvas" />
 
             <div class="footer">
                 <div class="container">
