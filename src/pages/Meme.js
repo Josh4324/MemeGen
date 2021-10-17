@@ -25,7 +25,7 @@ export default function Meme() {
     const [base641, setBase641] = useState("");
     const [detail, setDetail] = useState({});
     const boldTextStyle = {
-        fontSize: "40px",
+        fontSize: "80px",
         fontWeight: "bolder",
         strokeWidth: "2",
         stroke: "black",
@@ -36,7 +36,7 @@ export default function Meme() {
         userSelect: "none"
     }
     const textStyle = {
-        fontSize: "20px",
+        fontSize: "40px",
         fontWeight: "bold",
         textTransform: "lowercase",
         fill: "#FFF",
@@ -304,7 +304,7 @@ export default function Meme() {
                                     /></g>
                                     <g>
                                         <rect x={"15px"}
-                                            y={"15px"} width={270} height={270} style={{ stroke: "green", fill: "none", strokeWidth: 1 }} opacity={0.5} />
+                                            y={"15px"} width={570} height={570} style={{ stroke: "green", fill: "none", strokeWidth: 1 }} opacity={0.5} />
                                     </g>
                                     <g>
                                         <rect width={600} height={600} style={{ fill: "green", }} opacity={0.4} />
@@ -314,12 +314,12 @@ export default function Meme() {
 
 
                                     <rect x={"39px"}
-                                        y={"70px"} height="17" width="52" style={{ fill: "white" }}>
+                                        y={"178px"} height="27" width="72" style={{ fill: "white" }}>
                                     </rect>
                                     <text
-                                        style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Arial", fontSize: "12px", fontWeight: "normal" }}
-                                        x={"45px"}
-                                        y={"80px"}
+                                        style={{ fill: "#158d23", backgroundColor: "red", fontFamily: "Arial", fontSize: "16px", fontWeight: "normal" }}
+                                        x={"49px"}
+                                        y={"193px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -330,7 +330,7 @@ export default function Meme() {
                                     <text
                                         style={{ ...boldTextStyle }}
                                         x={"39px"}
-                                        y={"115px"}
+                                        y={"255px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -338,8 +338,8 @@ export default function Meme() {
                                     </text>
                                     <text
                                         style={{ ...textStyle }}
-                                        x={"69px"}
-                                        y={"119px"}
+                                        x={"100px"}
+                                        y={"255px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -348,7 +348,7 @@ export default function Meme() {
                                     <text
                                         style={{ ...boldTextStyle }}
                                         x={"39px"}
-                                        y={"160px"}
+                                        y={"345px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -356,8 +356,8 @@ export default function Meme() {
                                     </text>
                                     <text
                                         style={{ ...textStyle }}
-                                        x={"69px"}
-                                        y={"162px"}
+                                        x={"100px"}
+                                        y={"352px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -366,7 +366,7 @@ export default function Meme() {
                                     <text
                                         style={{ ...boldTextStyle }}
                                         x={"39px"}
-                                        y={"205px"}
+                                        y={"435px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -374,8 +374,8 @@ export default function Meme() {
                                     </text>
                                     <text
                                         style={{ ...textStyle }}
-                                        x={"69px"}
-                                        y={"208px"}
+                                        x={"100px"}
+                                        y={"435px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -384,7 +384,7 @@ export default function Meme() {
                                     <text
                                         style={{ ...boldTextStyle }}
                                         x={"39px"}
-                                        y={"250px"}
+                                        y={"530px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
@@ -392,14 +392,14 @@ export default function Meme() {
                                     </text>
                                     <text
                                         style={{ ...textStyle }}
-                                        x={"69px"}
-                                        y={"253px"}
+                                        x={"100px"}
+                                        y={"535px"}
                                         dominantBaseline="middle"
                                         textAnchor="start"
                                     >
                                         {c}
                                     </text>
-
+{/*                                     
                                     <line x1="100" y1="520" x2="500" y2="520" style={{ stroke: "white", strokeWidth: 1 }} />
 
                                     <text
@@ -437,14 +437,14 @@ export default function Meme() {
                                         textAnchor="start"
                                     >
                                         {c}
-                                    </text>
+                                    </text> */}
 
 
                                 </svg>) : (null)
                         }
                         
                         <button className="btn btn-block download-button px-2 mt-3" onClick={convertSvgToImage}><i class="fas fa-download"></i> Download Meme</button>
-                        <img src="images/loading.gif" />
+                        {/* <img src="images/loading.gif" /> */}
                         {/* <button className="button btn btn-block download-button px-2" onClick={reset} >Create Meme</button> */}
 
                         <div class="share-button text-center mt-4">
