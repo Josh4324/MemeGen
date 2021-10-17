@@ -82,33 +82,34 @@ export default function Meme() {
             ctx.fillStyle = "green";
             ctx.fillRect(0, 0, 600, 600);
 
-            ctx.strokeStyle = 'green';
+            ctx.strokeStyle = '#2fa703';
             ctx.strokeRect(15, 15, 570, 570);
             ctx.globalAlpha = 1;
             ctx.fillStyle = "white";
             ctx.strokeStyle = 'green';
-            ctx.fillRect(50, 30, 60, 20);
+            ctx.fillRect(40, 175, 72, 27);
+
 
             ctx.fillStyle = "green";
-            ctx.font = "14px Futura";
-            ctx.fillText("I AM A", 58, 45);
+            ctx.font = "16px Futura";
+            ctx.fillText("I AM A", 46, 193);
             ctx.fillStyle = "white";
-            ctx.font = "40px GothamCond-Black";
-            ctx.fillText("S", 50, 100);
-            ctx.font = "20px Futura";
-            ctx.fillText(s, 100, 90);
-            ctx.font = "40px GothamCond-Black";
-            ctx.fillText("P", 50, 150);
-            ctx.font = "20px Futura";
-            ctx.fillText(p, 100, 140);
-            ctx.font = "40px GothamCond-Black";
-            ctx.fillText("E", 50, 200);
-            ctx.font = "20px Futura";
-            ctx.fillText(e, 100, 190);
-            ctx.font = "40px GothamCond-Black";
-            ctx.fillText("C", 50, 250);
-            ctx.font = "20px Futura";
-            ctx.fillText(c, 100, 240);
+            ctx.font = "80px GothamCond-Black";
+            ctx.fillText("S", 39, 270);
+            ctx.font = "40px Futura";
+            ctx.fillText(s, 80, 260);
+            ctx.font = "80px GothamCond-Black";
+            ctx.fillText("P", 39, 355);
+            ctx.font = "40px Futura";
+            ctx.fillText(p, 80, 350);
+            ctx.font = "80px GothamCond-Black";
+            ctx.fillText("E", 39, 442);
+            ctx.font = "40px Futura";
+            ctx.fillText(e, 80, 436);
+            ctx.font = "80px GothamCond-Black";
+            ctx.fillText("C", 39, 525);
+            ctx.font = "40px Futura";
+            ctx.fillText(c, 80, 515);
 
 
 
