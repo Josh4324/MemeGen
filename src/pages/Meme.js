@@ -67,6 +67,7 @@ export default function Meme() {
     }, [])
 
     const getBase64Image = async (img, s, p, e, c) => {
+
         img.crossOrigin = '*';
         img.onload = async () => {
             //const canvas1 = document.createElement("canvas");
@@ -74,7 +75,7 @@ export default function Meme() {
             canvas.width = img.width;
             setWidth(img.width);
             canvas.height = img.height;
-            setHeight(img.height)
+            setHeight(img.height);
             const ctx = canvas.getContext("2d");
             ctx.drawImage(img, 0, 0, 600, 600);
             ctx.globalAlpha = 0.4;
@@ -83,9 +84,15 @@ export default function Meme() {
 
             ctx.strokeStyle = 'green';
             ctx.strokeRect(15, 15, 570, 570);
-
-            ctx.fillStyle = "white";
             ctx.globalAlpha = 1;
+            ctx.fillStyle = "white";
+            ctx.strokeStyle = 'green';
+            ctx.fillRect(50, 30, 60, 20);
+
+            ctx.fillStyle = "green";
+            ctx.font = "14px Futura";
+            ctx.fillText("I AM A", 58, 45);
+            ctx.fillStyle = "white";
             ctx.font = "40px GothamCond-Black";
             ctx.fillText("S", 50, 100);
             ctx.font = "20px Futura";
@@ -130,7 +137,29 @@ export default function Meme() {
         const base_image = new Image();
         base_image.src = image;
         console.log(base_image);
-        const base64 = getBase64Image(base_image, Sref.current.value, Pref.current.value, Eref.current.value, Cref.current.value);
+        let s, p, e, c
+        if (Sref.current.value[0].toLowerCase() === "s") {
+            s = Sref.current.value.slice(1,).toLowerCase()
+        } else {
+            s = Sref.current.value.toLowerCase();
+        }
+        if (Pref.current.value[0].toLowerCase() === "p") {
+            p = Pref.current.value.slice(1,).toLowerCase()
+        } else {
+            p = Pref.current.value.toLowerCase();
+        }
+        if (Eref.current.value[0].toLowerCase() === "e") {
+            e = Eref.current.value.slice(1,).toLowerCase()
+        } else {
+            e = Eref.current.value.toLowerCase();
+        }
+        if (Cref.current.value[0].toLowerCase() === "c") {
+            c = Cref.current.value.slice(1,).toLowerCase()
+        } else {
+            c = Cref.current.value.toLowerCase();
+        }
+
+        const base64 = getBase64Image(base_image, s, p, e, c);
         //setBase64(base64);
 
     }
@@ -268,7 +297,12 @@ export default function Meme() {
             fileRef.current.value = "";
             return NotificationManager.error("Please enter your C value", "Error")
         }
-        setS(Sref.current.value);
+
+        const maxAllowedSize = 5 * 1024 * 1024;
+        if (fileRef.current.files[0].size > maxAllowedSize) {
+            NotificationManager.error("Image size greater than 5mb", "Error");
+            fileRef.current.value = "";
+        }
         NotificationManager.info("Image Upload in progress", "Info")
         evt.preventDefault();
 
