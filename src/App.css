@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'GothamCond';
-  src: local('GothamCond'), url(./GothamCond-Black.otf) format('truetype');
+  font-family: 'GothamCond-Black';
+  src: local('GothamCond-Black'), url(./GothamCond-Black.otf) format('truetype');
 }
 
 @font-face {
@@ -74,7 +74,7 @@ body {
 }
 
 .box {
-  max-width: 400px;
+  max-width: 660px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 50px;
@@ -190,6 +190,11 @@ h1, h2, h3, h4, h5 {
   border: 1px solid rgb(50 176 3/95%);
   background: #000;
   margin-bottom: 30px;
+}
+
+#canvas {
+  width: 0;
+  height: 0;
 }
 
 .notification-container {

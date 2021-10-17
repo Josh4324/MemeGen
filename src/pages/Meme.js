@@ -64,12 +64,11 @@ export default function Meme() {
         console.log("render")
         return () => {
         }
-    }, [base64])
+    }, [])
 
-    const getBase64Image = (img) => {
-        console.log(img)
+    const getBase64Image = async (img, s, p, e, c) => {
         img.crossOrigin = '*';
-        img.onload = () => {
+        img.onload = async () => {
             //const canvas1 = document.createElement("canvas");
             const canvas = document.getElementById("canvas")
             canvas.width = img.width;
@@ -87,8 +86,90 @@ export default function Meme() {
 
             ctx.fillStyle = "white";
             ctx.globalAlpha = 1;
-            ctx.font = "30px Futura";
-            ctx.fillText("Hello World", 10, 50);
+            ctx.font = "40px GothamCond-Black";
+            ctx.fillText("S", 50, 100);
+            ctx.font = "20px Futura";
+            ctx.fillText(s, 100, 90);
+            ctx.font = "40px GothamCond-Black";
+            ctx.fillText("P", 50, 150);
+            ctx.font = "20px Futura";
+            ctx.fillText(p, 100, 140);
+            ctx.font = "40px GothamCond-Black";
+            ctx.fillText("E", 50, 200);
+            ctx.font = "20px Futura";
+            ctx.fillText(e, 100, 190);
+            ctx.font = "40px GothamCond-Black";
+            ctx.fillText("C", 50, 250);
+            ctx.font = "20px Futura";
+            ctx.fillText(c, 100, 240);
+
+
+
+            console.log("can", canvas);
+            const dataURL = canvas.toDataURL("image/jpeg", 1.0);
+
+            let formData = new FormData();
+            formData.append("picture", dataURL);
+            const result = await postImage2(formData);
+            console.log(result.data);
+            setRIMG(result.data);
+            setImgState(true);
+            setBase64(dataURL);
+            return dataURL;
+        }
+
+    }
+
+    const generateMeme = async (img) => {
+        console.log(Sref.current.value, Pref.current.value)
+        setS(Sref.current.value);
+        setP(Pref.current.value);
+        setE(Eref.current.value);
+        setC(Cref.current.value);
+        const image = img;
+        const base_image = new Image();
+        base_image.src = image;
+        console.log(base_image);
+        const base64 = getBase64Image(base_image, Sref.current.value, Pref.current.value, Eref.current.value, Cref.current.value);
+        //setBase64(base64);
+
+    }
+
+    const DgenerateMeme = async (img) => {
+        const image = img;
+        const base_image = new Image();
+        base_image.src = image;
+        const base64 = DgetBase64Image(base_image);
+        setBase64(base64);
+
+    }
+
+    const DgetBase64Image = async (img) => {
+        img.crossOrigin = '*';
+        img.onload = async () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            setWidth(img.width);
+            canvas.height = img.height;
+            setHeight(img.height)
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, 600, 600);
+            ctx.globalAlpha = 0.4;
+            ctx.fillStyle = "green";
+            ctx.fillRect(0, 0, 600, 600);
+
+            ctx.strokeStyle = 'green';
+            ctx.strokeRect(15, 15, 570, 570);
+
+            ctx.fillStyle = "white";
+            ctx.globalAlpha = 1;
+            ctx.font = "40px GothamCond";
+            ctx.fillText("S", 30, 50);
+
+            ctx.font = "40px GothamCond";
+            ctx.fillText("P", 30, 100);
+            ctx.fillText("E", 30, 150);
+            ctx.fillText("C", 30, 200);
 
 
 
@@ -100,7 +181,6 @@ export default function Meme() {
             a.href = dataURL;
             document.body.appendChild(a);
             a.click();
-            console.log(dataURL);
             setImgState(true);
             setBase64(dataURL);
             return dataURL;
@@ -108,47 +188,16 @@ export default function Meme() {
 
     }
 
-    const generateMeme = (img) => {
-        console.log(img);
-        console.log(Sref, Pref, Eref, Cref)
-
-        setS(Sref.current.value);
-        setP(Pref.current.value);
-        setE(Eref.current.value);
-        setC(Cref.current.value);
-        const image = img;
-        const base_image = new Image();
-        base_image.src = image;
-        console.log(base_image);
-        const base64 = getBase64Image(base_image);
-        setBase64(base64);
-        setTimeout(() => { convertSvgToImage2() }, 6000)
-
-
-    }
-
     const convertSvgToImage = () => {
         NotificationManager.info("Downloading Meme", "info");
-        console.log(svgRef.current);
-        let svgData = new XMLSerializer().serializeToString(svgRef.current);
-        const canvas = document.createElement("canvas");
-        canvas.setAttribute("id", "canvas");
-        const svgSize = svgRef.current.getBoundingClientRect();
-        canvas.width = svgSize.width;
-        canvas.height = svgSize.height;
-        const img = document.createElement("img");
-        img.setAttribute("src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData))));
-        img.onload = function () {
-            canvas.getContext("2d").drawImage(img, 0, 0);
-            canvas.getContext("2d").font("30px Futura");
+        const canvas = document.getElementById("canvas")
+        const dataURL = canvas.toDataURL("image/jpeg", 1.0);
+        const a = document.createElement("a");
+        a.download = "meme.png";
+        a.href = dataURL;
+        document.body.appendChild(a);
+        a.click();
 
-            const canvasdata = canvas.toDataURL("image/jpeg", 1.0);
-            const a = document.createElement("a");
-            a.download = "meme.png";
-            a.href = canvasdata;
-            document.body.appendChild(a);
-            a.click();
-        };
     }
 
     const convertSvgToImage2 = async () => {
@@ -219,6 +268,7 @@ export default function Meme() {
             fileRef.current.value = "";
             return NotificationManager.error("Please enter your C value", "Error")
         }
+        setS(Sref.current.value);
         NotificationManager.info("Image Upload in progress", "Info")
         evt.preventDefault();
 
@@ -290,172 +340,16 @@ export default function Meme() {
                     </div>)
                 }
 
-
-
+                <canvas id="canvas" />
                 {
                     imgState === true ? (<div className="meme" >
 
-                        {
-                            base64 ? (
-                                <svg
-                                    width={600}
-                                    id="svg_ref"
-                                    height={600}
-                                    ref={svgRef}
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xmlnsXlink="http://www.w3.org/1999/xlink">
-                                    <defs>
-
-                                    </defs>
-
-                                    <g> <image
-                                        xlinkHref={base64}
-                                        height={600}
-                                        width={600}
-                                    /></g>
-                                    <g>
-                                        <rect x={"15px"}
-                                            y={"15px"} width={270} height={270} style={{ stroke: "green", fill: "none", strokeWidth: 1 }} opacity={0.5} />
-                                    </g>
-                                    <g>
-                                        <rect width={600} height={600} style={{ fill: "green", }} opacity={0.4} />
-                                    </g>
-
-
-
-
-                                    <rect x={"39px"}
-                                        y={"70px"} height="17" width="52" style={{ fill: "white" }}>
-                                    </rect>
-                                    <text
-                                        style={{ fill: "#20b832", backgroundColor: "red", fontFamily: "Arial", fontSize: "12px", fontWeight: "normal" }}
-                                        x={"45px"}
-                                        y={"80px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {"I AM A"}
-                                    </text>
-
-
-                                    <text
-                                        style={{ ...boldTextStyle }}
-                                        x={"39px"}
-                                        y={"115px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        s
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle }}
-                                        x={"69px"}
-                                        y={"119px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {s}
-                                    </text>
-                                    <text
-                                        style={{ ...boldTextStyle }}
-                                        x={"39px"}
-                                        y={"160px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        p
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle }}
-                                        x={"69px"}
-                                        y={"162px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {p}
-                                    </text>
-                                    <text
-                                        style={{ ...boldTextStyle }}
-                                        x={"39px"}
-                                        y={"205px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        e
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle }}
-                                        x={"69px"}
-                                        y={"208px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {e}
-                                    </text>
-                                    <text
-                                        style={{ ...boldTextStyle }}
-                                        x={"39px"}
-                                        y={"250px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        c
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle }}
-                                        x={"69px"}
-                                        y={"253px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {c}
-                                    </text>
-
-                                    <line x1="100" y1="520" x2="500" y2="520" style={{ stroke: "white", strokeWidth: 1 }} />
-
-                                    <text
-                                        style={{ ...textStyle, stroke: "black", margin: "5px", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                        x={"110px"}
-                                        y={"550px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {s}
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                        x={"210px"}
-                                        y={"550px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {p}
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, padding: "5px", stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                        x={"310px"}
-                                        y={"550px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {e}
-                                    </text>
-                                    <text
-                                        style={{ ...textStyle, stroke: "black", strokeWidth: "1", zIndex: 1, fontSize: "20px", fontFamily: "Arial" }}
-                                        x={"410px"}
-                                        y={"550px"}
-                                        dominantBaseline="middle"
-                                        textAnchor="start"
-                                    >
-                                        {c}
-                                    </text>
-
-
-                                </svg>) : (null)
-                        }
-                        
+                        <img src={rimag} />
                         <button className="btn btn-block download-button px-2 mt-3" onClick={convertSvgToImage}><i class="fas fa-download"></i> Download Meme</button>
-                        <img src="images/loading.gif" />
+                        {
+                            rimag.length === 0 ? (<img src="images/loading.gif" />) : null
+                        }
+
                         {/* <button className="button btn btn-block download-button px-2" onClick={reset} >Create Meme</button> */}
 
                         <div class="share-button text-center mt-4">
@@ -497,7 +391,7 @@ export default function Meme() {
                 }
             </div>
 
-            <canvas id="canvas" />
+
 
             <div class="footer">
                 <div class="container">
