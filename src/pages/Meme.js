@@ -25,7 +25,7 @@ export default function Meme() {
     const [base641, setBase641] = useState("");
     const [detail, setDetail] = useState({});
     const boldTextStyle = {
-        fontSize: "40px",
+        fontSize: "80px",
         fontWeight: "bolder",
         strokeWidth: "2",
         stroke: "black",
@@ -36,7 +36,7 @@ export default function Meme() {
         userSelect: "none"
     }
     const textStyle = {
-        fontSize: "20px",
+        fontSize: "40px",
         fontWeight: "bold",
         textTransform: "lowercase",
         fill: "#FFF",
@@ -337,6 +337,7 @@ export default function Meme() {
                             <button class="btn"><i class="fas fa-camera"></i> Upload your photo</button>
                             <input type="file" onChange={imageSubmit} name="file" accept="image/png, image/jpeg" id="file" ref={fileRef} class="input-file" />
                         </div>
+                        <span style={{ fontFamily: "GothamCond-Black", color: '#000' }}>G</span>
                     </div>)
                 }
 
