@@ -9,7 +9,7 @@
 }
 
 body {
-  font-family: "Futura", arial;
+  font-family: "Futura", arial !important;
 }
 
 .App {
@@ -192,10 +192,7 @@ h1, h2, h3, h4, h5 {
   margin-bottom: 30px;
 }
 
-#canvas {
-  width: 0;
-  height: 0;
-}
+
 
 .notification-container {
   box-shadow: none;
