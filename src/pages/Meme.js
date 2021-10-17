@@ -31,7 +31,7 @@ export default function Meme() {
         stroke: "black",
         zIndex: 1,
         textTransform: "capitalize",
-        fontFamily: "Arial Black",
+        fontFamily: "Arial",
         fill: "#FFF",
         userSelect: "none"
     }
@@ -43,7 +43,7 @@ export default function Meme() {
         userSelect: "none",
         stroke: "black",
         strokeWidth: "1.5",
-        fontFamily: "Arial Black",
+        fontFamily: "Arial",
         zIndex: 1,
     }
 
@@ -266,7 +266,7 @@ export default function Meme() {
                 <h3 className="spec-header">Spec Meme Generator</h3>
                 {
                     imgState === true ? (null) : (<div className="form-box">
-                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme 'Arial Black'</p>
+                        <p className="spec-sub-header">Enter your Details to generate your Spec Meme</p>
                         <div className="flex form-group">
                             <div className="text">S</div>
                             <input className="meme-input form-control" ref={Sref} type="text" />
@@ -453,7 +453,9 @@ export default function Meme() {
 
                                 </svg>) : (null)
                         }
+                        
                         <button className="btn btn-block download-button px-2 mt-3" onClick={convertSvgToImage}><i class="fas fa-download"></i> Download Meme</button>
+                        <img src="images/loading.gif" />
                         {/* <button className="button btn btn-block download-button px-2" onClick={reset} >Create Meme</button> */}
 
                         <div class="share-button text-center mt-4">
