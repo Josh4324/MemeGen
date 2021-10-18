@@ -111,6 +111,9 @@ export default function Meme() {
             ctx.font = "40px Futura";
             ctx.fillText(c, 80, 515);
 
+            ctx.font = "20px Futura";
+            ctx.fillText("@2Sureng", 480, 555);
+
 
 
             console.log("can", canvas);
