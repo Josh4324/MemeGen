@@ -114,7 +114,9 @@ export default function Meme() {
             ctx.font = "20px Futura";
             ctx.fillText("@2Sureng", 480, 555);
 
-
+            const logo_image = new Image();
+            logo_image.src = 'images/2sure-logo.png';
+            ctx.drawImage(logo_image, 502, 492, 54, 40);
 
             console.log("can", canvas);
             const dataURL = canvas.toDataURL("image/jpeg", 1.0);
