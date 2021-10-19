@@ -8,9 +8,7 @@ export default function Meme() {
     const Pref = useRef("");
     const Eref = useRef("");
     const Cref = useRef("");
-    const imageRef = useRef("");
     const fileRef = useRef("");
-    const svgRef = useRef("");
 
     const [file, setfile] = useState("");
     const [rimag, setRIMG] = useState("")
@@ -24,41 +22,6 @@ export default function Meme() {
     const [base64, setBase64] = useState("");
     const [base641, setBase641] = useState("");
     const [detail, setDetail] = useState({});
-    const boldTextStyle = {
-        fontSize: "80px",
-        fontWeight: "bolder",
-        strokeWidth: "2",
-        stroke: "black",
-        zIndex: 1,
-        textTransform: "capitalize",
-        fontFamily: "Arial",
-        fill: "#FFF",
-        userSelect: "none"
-    }
-    const textStyle = {
-        fontSize: "40px",
-        fontWeight: "bold",
-        textTransform: "lowercase",
-        fill: "#FFF",
-        userSelect: "none",
-        stroke: "black",
-        strokeWidth: "1.5",
-        fontFamily: "Arial",
-        zIndex: 1,
-    }
-
-    const initialState = {
-        toptext: "",
-        bottomtext: "",
-        isTopDragging: false,
-        isBottomDragging: false,
-        topY: "10%",
-        topX: "50%",
-        bottomX: "50%",
-        bottomY: "90%"
-    }
-
-    const [current, setCurrent] = useState(initialState);
 
     useEffect(() => {
         console.log("render")
@@ -170,59 +133,6 @@ export default function Meme() {
 
     }
 
-    const DgenerateMeme = async (img) => {
-        const image = img;
-        const base_image = new Image();
-        base_image.src = image;
-        const base64 = DgetBase64Image(base_image);
-        setBase64(base64);
-
-    }
-
-    const DgetBase64Image = async (img) => {
-        img.crossOrigin = '*';
-        img.onload = async () => {
-            const canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            setWidth(img.width);
-            canvas.height = img.height;
-            setHeight(img.height)
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, 600, 600);
-            ctx.globalAlpha = 0.4;
-            ctx.fillStyle = "green";
-            ctx.fillRect(0, 0, 600, 600);
-
-            ctx.strokeStyle = 'green';
-            ctx.strokeRect(15, 15, 570, 570);
-
-            ctx.fillStyle = "white";
-            ctx.globalAlpha = 1;
-            ctx.font = "40px GothamCond";
-            ctx.fillText("S", 30, 50);
-
-            ctx.font = "40px GothamCond";
-            ctx.fillText("P", 30, 100);
-            ctx.fillText("E", 30, 150);
-            ctx.fillText("C", 30, 200);
-
-
-
-            console.log("can", canvas);
-            const dataURL = canvas.toDataURL("image/jpeg", 1.0);
-
-            const a = document.createElement("a");
-            a.download = "meme.jpg";
-            a.href = dataURL;
-            document.body.appendChild(a);
-            a.click();
-            setImgState(true);
-            setBase64(dataURL);
-            return dataURL;
-        }
-
-    }
-
     const convertSvgToImage = () => {
         NotificationManager.info("Downloading Meme", "info");
         const canvas = document.getElementById("canvas")
@@ -232,38 +142,6 @@ export default function Meme() {
         a.href = dataURL;
         document.body.appendChild(a);
         a.click();
-
-    }
-
-    const convertSvgToImage2 = async () => {
-        console.log(svgRef.current);
-        let svgData = new XMLSerializer().serializeToString(svgRef.current);
-        const canvas = document.createElement("canvas");
-        canvas.setAttribute("id", "canvas");
-        const svgSize = svgRef.current.getBoundingClientRect();
-        canvas.width = svgSize.width;
-        canvas.height = svgSize.height;
-        const img = document.createElement("img");
-        img.setAttribute("src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData))));
-        img.onload = function async() {
-            canvas.getContext("2d").drawImage(img, 0, 0);
-            const canvasdata = canvas.toDataURL("image/jpeg", 1.0);
-            let run = async () => {
-                console.log("canvasdata", canvasdata);
-                let formData = new FormData();
-                formData.append("picture", canvasdata);
-                const result = await postImage2(formData);
-                setRIMG(result.data)
-                console.log(result);
-            }
-            run();
-
-            /* const a = document.createElement("a");
-            a.download = "meme.png";
-            a.href = canvasdata;
-            document.body.appendChild(a);
-            a.click(); */
-        };
     }
 
     const postImage = async (userCred) => {
