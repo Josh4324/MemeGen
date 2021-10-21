@@ -1,7 +1,12 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { NotificationManager } from 'react-notifications';
 import axios from "axios";
+import'cropperjs/dist/cropper.css';
+import Cropper from'cropperjs';
+
 
 export default function Meme() {
     const Sref = useRef("");
@@ -9,10 +14,14 @@ export default function Meme() {
     const Eref = useRef("");
     const Cref = useRef("");
     const fileRef = useRef("");
+    const newImageRef = useRef("");
 
     const [file, setfile] = useState("");
     const [rimag, setRIMG] = useState("")
+    const [newimg, setNewImg] = useState("");
     const [imgState, setImgState] = useState(false);
+    const [imgState2, setImgState2] = useState(false);
+    const [imgState3, setImgState3] = useState(false);
     const [s, setS] = useState("");
     const [p, setP] = useState("");
     const [e, setE] = useState("");
@@ -22,12 +31,6 @@ export default function Meme() {
     const [base64, setBase64] = useState("");
     const [base641, setBase641] = useState("");
     const [detail, setDetail] = useState({});
-
-    useEffect(() => {
-        console.log("render")
-        return () => {
-        }
-    }, [])
 
     const getBase64Image = async (img, s, p, e, c) => {
 
@@ -97,39 +100,37 @@ export default function Meme() {
     }
 
     const generateMeme = async (img) => {
-        console.log(Sref.current.value, Pref.current.value)
-        setS(Sref.current.value);
-        setP(Pref.current.value);
-        setE(Eref.current.value);
-        setC(Cref.current.value);
         const image = img;
         const base_image = new Image();
         base_image.src = image;
         console.log(base_image);
-        let s, p, e, c
-        if (Sref.current.value[0].toLowerCase() === "s") {
-            s = Sref.current.value.slice(1,).toLowerCase()
+        let s = localStorage.getItem("s");
+        let p = localStorage.getItem("p");
+        let e = localStorage.getItem("e");
+        let c = localStorage.getItem("c");
+
+        if (s[0].toLowerCase() === "s") {
+            s = s.slice(1,).toLowerCase()
         } else {
-            s = Sref.current.value.toLowerCase();
+            s = s.toLowerCase();
         }
-        if (Pref.current.value[0].toLowerCase() === "p") {
-            p = Pref.current.value.slice(1,).toLowerCase()
+        if (p[0].toLowerCase() === "p") {
+            p = p.slice(1,).toLowerCase()
         } else {
-            p = Pref.current.value.toLowerCase();
+            p = p.toLowerCase();
         }
-        if (Eref.current.value[0].toLowerCase() === "e") {
-            e = Eref.current.value.slice(1,).toLowerCase()
+        if (e[0].toLowerCase() === "e") {
+            e = e.slice(1,).toLowerCase()
         } else {
-            e = Eref.current.value.toLowerCase();
+            e = e.toLowerCase();
         }
-        if (Cref.current.value[0].toLowerCase() === "c") {
-            c = Cref.current.value.slice(1,).toLowerCase()
+        if (c[0].toLowerCase() === "c") {
+            c = c.slice(1,).toLowerCase()
         } else {
-            c = Cref.current.value.toLowerCase();
+            c = c.toLowerCase();
         }
 
         const base64 = getBase64Image(base_image, s, p, e, c);
-        //setBase64(base64);
 
     }
 
@@ -146,7 +147,7 @@ export default function Meme() {
 
     const postImage = async (userCred) => {
         try {
-            const res = await axios.patch(`https://www.checkspecstatus.com/api/v1/image`, userCred);
+            const res = await axios.patch(`http://localhost:8081/api/v1/image`, userCred);
             console.log(res);
             return res.data;
         } catch (err) {
@@ -156,7 +157,7 @@ export default function Meme() {
 
     const postImage2 = async (userCred) => {
         try {
-            const res = await axios.patch(`https://www.checkspecstatus.com/api/v1/image/finish`, userCred);
+            const res = await axios.patch(`http://localhost:8081/api/v1/image/finish`, userCred);
             console.log(res);
             return res.data;
         } catch (err) {
@@ -181,6 +182,15 @@ export default function Meme() {
             fileRef.current.value = "";
             return NotificationManager.error("Please enter your C value", "Error")
         }
+        localStorage.removeItem("s");
+        localStorage.removeItem("p");
+        localStorage.removeItem("e");
+        localStorage.removeItem("c");
+
+        localStorage.setItem("s",Sref.current.value);
+        localStorage.setItem("p",Pref.current.value);
+        localStorage.setItem("e",Eref.current.value);
+        localStorage.setItem("c",Cref.current.value);
 
         const maxAllowedSize = 5 * 1024 * 1024;
         if (fileRef.current.files[0].size > maxAllowedSize) {
@@ -197,15 +207,66 @@ export default function Meme() {
 
 
         const result = await postImage(formData);
-        console.log(result);
-        if (result.code === 200) {
+        setImgState2(true);
+        console.log(result.data);
+        setNewImg(result.data);
+       /*  if (result.code === 200) {
             NotificationManager.info("Generating Meme", "Info")
             generateMeme(result.data);
             setfile(result.data)
         } else {
             fileRef.current.value = "";
             NotificationManager.error("Error uploading Image", "Error")
+        } */
+
+    }
+
+   
+
+    let cropper;
+    useEffect(() => {
+        if (newimg.length > 0){
+              cropper = new Cropper(document.getElementById('image'), {
+            viewMode: 0,
+            aspectRatio: 1,
+            zoomable:true,
+            center:true,
+            modal:true,
+            autoCropArea: 0.8,
+            autoCrop:true,
+            preview:'.preview',
+
+
+            crop(event) {
+              console.log(event.detail.x);
+              console.log(event.detail.y);
+              console.log(event.detail.width);
+              console.log(event.detail.height);
+              console.log(event.detail.rotate);
+              console.log(event.detail.scaleX);
+              console.log(event.detail.scaleY);
+            },
+        });
         }
+      
+
+        
+    }, [newimg])
+
+    const getImage = async () => {
+        const ff = cropper.getCroppedCanvas({
+            imageSmoothingEnabled:false,
+            imageSmoothingQuality:'high',
+            
+        }).toDataURL();
+        let formData = new FormData();
+        formData.append("picture", ff);
+
+        const result = await postImage2(formData);
+        console.log(result.data);
+        NotificationManager.info("Generating Meme", "Info")
+        generateMeme(result.data);
+        setImgState3(true);
 
     }
 
@@ -233,7 +294,7 @@ export default function Meme() {
             <div className="box">
                 <h3 className="spec-header">Spec Meme Generator</h3>
                 {
-                    imgState === true ? (null) : (<div className="form-box">
+                  imgState2 === true ? (null) :  imgState === true ? (null) : (<div className="form-box">
                         <p className="spec-sub-header">Enter your Details to generate your Spec Meme</p>
                         <div className="flex form-group">
                             <div className="text">S</div>
@@ -308,10 +369,35 @@ export default function Meme() {
                         </div>
                     </div>) : (null)
                 }
+
+                {
+                    imgState3 === true ? (null) : (
+                    <div>  
+                        
+                        <div>
+                        <img style={{maxWidth:"100%", display:"block"}} id="image" src={newimg} />
+                        </div>
+                        {
+                            <div>{
+                                    newimg.length > 0 ? (  <button className="btn btn-block download-button px-2 mt-3" onClick={getImage}>Done</button>) : null
+                                }</div>
+                        }
+                      
+                    
+                    
+                    </div>) 
+                }
+
+          
+               
             </div>
 
+           
+
+           
 
 
+          {/*   <div class="preview" style={{width:"600px", height:"600px", overflow:"hidden"}}></div> */}
             <div class="footer">
                 <div class="container">
                     <div class="row">
