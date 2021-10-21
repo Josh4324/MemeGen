@@ -33,7 +33,6 @@ export default function Meme() {
     const [detail, setDetail] = useState({});
 
     const getBase64Image = async (img, s, p, e, c) => {
-
         img.crossOrigin = '*';
         img.onload = async () => {
             //const canvas1 = document.createElement("canvas");
@@ -91,10 +90,8 @@ export default function Meme() {
             formData.append("picture", dataURL);
             const result = await postImage2(formData);
             console.log(result.data);
-            setRIMG(result.data);
             setImgState(true);
-            setBase64(dataURL);
-            return dataURL;
+            setRIMG(result.data);
         }
 
     }
@@ -148,7 +145,6 @@ export default function Meme() {
     const postImage = async (userCred) => {
         try {
             const res = await axios.patch(`https://checkspecstatus.com/api/v1/image`, userCred);
-            console.log(res);
             return res.data;
         } catch (err) {
             return err;
@@ -205,10 +201,8 @@ export default function Meme() {
         let formData = new FormData();
         formData.append("picture", file);
 
-
-        const result = await postImage(formData);
         setImgState2(true);
-        console.log(result.data);
+        const result = await postImage(formData);
         setNewImg(result.data);
        /*  if (result.code === 200) {
             NotificationManager.info("Generating Meme", "Info")
@@ -248,25 +242,20 @@ export default function Meme() {
             },
         });
         }
-      
-
-        
     }, [newimg])
 
     const getImage = async () => {
+        NotificationManager.info("Generating Meme", "Info")
         const ff = cropper.getCroppedCanvas({
             imageSmoothingEnabled:false,
             imageSmoothingQuality:'high',
-            
+            width: 600,
+            height: 600,
         }).toDataURL();
-        let formData = new FormData();
-        formData.append("picture", ff);
-
-        const result = await postImage2(formData);
-        console.log(result.data);
-        NotificationManager.info("Generating Meme", "Info")
-        generateMeme(result.data);
+       
         setImgState3(true);
+        generateMeme(ff);
+       
 
     }
 
@@ -319,16 +308,16 @@ export default function Meme() {
                         <span style={{ fontFamily: "GothamCond-Black", color: '#000' }}>G</span>
                     </div>)
                 }
-
+                  {
+                            rimag.length === 0 && imgState3 === true  ? (<img src="images/loading.gif" style={{marginLeft:"auto", marginRight:"auto", width:"150px", display:"block"}}  />) : null
+                        }
                 <canvas id="canvas" />
                 {
                     imgState === true ? (<div className="meme" >
 
-                        <img src={rimag} />
+                        <img src={rimag} style={{maxWidth:"100%", display:"block"}} />
                         <button className="btn btn-block download-button px-2 mt-3" onClick={convertSvgToImage}><i class="fas fa-download"></i> Download Meme</button>
-                        {
-                            rimag.length === 0 ? (<img src="images/loading.gif" />) : null
-                        }
+                       
 
                         {/* <button className="button btn btn-block download-button px-2" onClick={reset} >Create Meme</button> */}
 
@@ -369,7 +358,9 @@ export default function Meme() {
                         </div>
                     </div>) : (null)
                 }
-
+                 {
+                     newimg.length === 0 && imgState2 === true ? (<img src="images/loading.gif" style={{marginLeft:"auto", marginRight:"auto", width:"150px", display:"block"}} />) : (null)
+                }
                 {
                     imgState3 === true ? (null) : (
                     <div>  
@@ -377,6 +368,7 @@ export default function Meme() {
                         <div>
                         <img style={{maxWidth:"100%", display:"block"}} id="image" src={newimg} />
                         </div>
+                       
                         {
                             <div>{
                                     newimg.length > 0 ? (  <button className="btn btn-block download-button px-2 mt-3" onClick={getImage}>Done</button>) : null
