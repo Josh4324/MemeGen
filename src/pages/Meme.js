@@ -202,17 +202,9 @@ export default function Meme() {
         formData.append("picture", file);
 
         setImgState2(true);
-        const result = await postImage(formData);
-        setNewImg(result.data);
-       /*  if (result.code === 200) {
-            NotificationManager.info("Generating Meme", "Info")
-            generateMeme(result.data);
-            setfile(result.data)
-        } else {
-            fileRef.current.value = "";
-            NotificationManager.error("Error uploading Image", "Error")
-        } */
-
+        //const result = await postImage(formData);
+        let url = URL.createObjectURL(file);
+        setNewImg(url);
     }
 
    
@@ -358,6 +350,7 @@ export default function Meme() {
                         </div>
                     </div>) : (null)
                 }
+                {newimg.length > 0 && imgState === false ? ( <p className="spec-sub-header">Adjust your photo within the crop area. You can pinch to zoom or expand crop area as required</p>) : null}
                  {
                      newimg.length === 0 && imgState2 === true ? (<img src="images/loading.gif" style={{marginLeft:"auto", marginRight:"auto", width:"150px", display:"block"}} />) : (null)
                 }
