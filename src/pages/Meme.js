@@ -6,7 +6,7 @@ import { NotificationManager } from "react-notifications";
 import axios from "axios";
 import "cropperjs/dist/cropper.css";
 import Cropper from "cropperjs";
-const APIurl = "http://localhost:8081";
+const APIurl = "https://defineyourspec.com";
 
 export default function Meme() {
   const Sref = useRef("");
