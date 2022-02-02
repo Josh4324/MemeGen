@@ -118,22 +118,12 @@ export default function Meme() {
 
   const convertSvgToImage = () => {
     NotificationManager.info("Downloading Meme", "info");
-    const canvas = document.getElementById("canvas");
-    const dataURL = canvas.toDataURL("image/jpeg", 1.0);
     const a = document.createElement("a");
     a.download = "meme.png";
-    a.href = dataURL;
+    a.href = rimag;
+    a.target = "_blank";
     document.body.appendChild(a);
     a.click();
-  };
-
-  const postImage = async (userCred) => {
-    try {
-      const res = await axios.patch(`${APIurl}/api/v1/image`, userCred);
-      return res.data;
-    } catch (err) {
-      return err;
-    }
   };
 
   const postImage2 = async (userCred) => {
@@ -161,6 +151,10 @@ export default function Meme() {
     if (Cref.current.value === "") {
       fileRef.current.value = "";
       return NotificationManager.error("Please enter your C value", "Error");
+    }
+
+    if (emailRef.current.value === "") {
+      return NotificationManager.error("Please enter your email", "Error");
     }
     localStorage.removeItem("s");
     localStorage.removeItem("p");
@@ -316,7 +310,7 @@ export default function Meme() {
               </button>
               <input
                 type="file"
-                onChange={imageSubmit}
+                onInput={imageSubmit}
                 name="file"
                 accept="image/png, image/jpeg"
                 id="file"
