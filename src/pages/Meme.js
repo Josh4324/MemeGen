@@ -364,7 +364,7 @@ export default function Meme() {
                 style={{ color: "white" }}
                 rel="noopener noreferrer"
                 className="share-button mr-3"
-                href={`https://twitter.com/share?text=I just checked generated my spec meme. You can generate yours at at https://defineyourspec.com.com, check it out - ${rimag}`}
+                href={`https://twitter.com/share?text=I just generated my spec meme. You can generate yours at at https://defineyourspec.com/, check it out - ${rimag}`}
               >
                 <i class="fab fa-twitter-square"></i>
               </a>
@@ -373,7 +373,7 @@ export default function Meme() {
                 style={{ color: "white" }}
                 rel="noopener noreferrer"
                 className="share-button mr-3"
-                href={`whatsapp://send?text=I just checked generated my spec meme. You can generate yours at at https://defineyourspec.com.com, check it out - ${rimag}`}
+                href={`whatsapp://send?text=I just generated my spec meme. You can generate yours at at https://defineyourspec.com/, check it out - ${rimag}`}
               >
                 <i class="fab fa-whatsapp"></i>
               </a>
