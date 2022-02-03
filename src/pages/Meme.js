@@ -156,6 +156,17 @@ export default function Meme() {
     if (emailRef.current.value === "") {
       return NotificationManager.error("Please enter your email", "Error");
     }
+
+    let regex =
+      /^[\/\!#\$\%&'\*\+\-\=\?\^_`\{\|\}~A-Za-z0-9]+[\.-]?[\/\!#\$\%&'\*\+\-\=\?\^_`\{\|\}~A-Za-z0-9]*@\w+([\.-]?\w+)*(\.\w{2,40})+$/;
+    console.log(regex.test(emailRef.current.value));
+    if (regex.test(emailRef.current.value) === false) {
+      return NotificationManager.error(
+        "Please enter your email in the correct format",
+        "Error"
+      );
+    }
+
     localStorage.removeItem("s");
     localStorage.removeItem("p");
     localStorage.removeItem("e");
